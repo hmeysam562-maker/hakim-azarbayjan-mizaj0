@@ -1,0 +1,11 @@
+{
+  "name":"ارزیابی مزاج حکیم آذربایجان",
+  "short_name":"حکیم آذربایجان",
+  "start_url":"./",
+  "display":"standalone",
+  "background_color":"#fbfaf5",
+  "theme_color":"#17451f",
+  "dir":"rtl",
+  "lang":"fa",
+  "icons":[{"src":"logo.png","sizes":"512x512","type":"image/png"}]
+}
