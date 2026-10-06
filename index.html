@@ -1,1229 +1,2629 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="fa" dir="rtl">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="theme-color" content="#17451f">
-<meta name="description" content="سامانه حرفه‌ای ارزیابی مزاج حکیم آذربایجان">
+
+<title>ارزیابی مزاج | سلامتکده و عطاری حکیم آذربایجان</title>
+
 <link rel="manifest" href="manifest.json">
-<link rel="icon" href="logo.png">
-<title>ارزیابی مزاج | حکیم آذربایجان</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;500;600;700;800&display=swap');
-
 :root{
---green:#17451f;
---green2:#286b32;
---gold:#b78620;
---cream:#fbfaf5;
---ink:#172018;
---muted:#6b746c;
---line:#e5e3d8;
---card:#fff;
---danger:#9b2c2c
+  --green:#17451f;
+  --green2:#286b32;
+  --green3:#eaf4eb;
+
+  --gold:#b78620;
+  --gold2:#d7ad4d;
+  --gold-light:#fff8e8;
+
+  --red:#c62828;
+  --red-light:#fdeaea;
+
+  --earth:#8a6a45;
+  --earth-light:#f1e9de;
+
+  --fire:#e69a00;
+  --fire-light:#fff4d6;
+
+  --blue:#1976b9;
+  --blue-light:#e7f3fb;
+
+  --text:#263126;
+  --muted:#6c746d;
+  --border:#dfe6df;
+  --bg:#f4f7f4;
+  --white:#fff;
+
+  --shadow:0 8px 30px rgba(23,69,31,.08);
 }
 
-*{box-sizing:border-box}
+*{
+  box-sizing:border-box;
+}
+
+html{
+  scroll-behavior:smooth;
+}
 
 body{
-margin:0;
-background:linear-gradient(135deg,#f7f8f1,#fdfcf9);
-color:var(--ink);
-font-family:Vazirmatn,Tahoma,sans-serif
+  margin:0;
+  font-family:"Vazirmatn",Tahoma,sans-serif;
+  background:var(--bg);
+  color:var(--text);
+  line-height:1.9;
 }
 
-header{
-background:linear-gradient(135deg,#123919,#286b32);
-color:#fff;
-padding:18px 16px 22px;
-box-shadow:0 4px 20px #0002
+button,
+input,
+select,
+textarea{
+  font-family:inherit;
+}
+
+button{
+  cursor:pointer;
+}
+
+.container{
+  width:min(1180px,calc(100% - 30px));
+  margin:auto;
+}
+
+/* =========================
+   HEADER
+========================= */
+
+.header{
+  background:linear-gradient(135deg,var(--green),#102f16);
+  color:#fff;
+  padding:22px 0;
+  box-shadow:0 5px 25px rgba(0,0,0,.12);
+}
+
+.header-inner{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:20px;
 }
 
 .brand{
-max-width:980px;
-margin:auto;
-display:flex;
-align-items:center;
-gap:14px
+  display:flex;
+  align-items:center;
+  gap:15px;
 }
 
-.brand img{
-width:72px;
-height:72px;
-border-radius:50%;
-background:#fff;
-object-fit:cover
+.brand-logo{
+  width:72px;
+  height:72px;
+  object-fit:contain;
+  background:#fff;
+  border-radius:18px;
+  padding:5px;
 }
 
 .brand h1{
-font-size:21px;
-margin:0 0 4px
+  margin:0;
+  font-size:24px;
+  font-weight:800;
 }
 
 .brand p{
-margin:0;
-opacity:.86;
-font-size:12px
+  margin:4px 0 0;
+  color:#dcebdc;
+  font-size:13px;
 }
 
+.header-badge{
+  background:rgba(255,255,255,.1);
+  border:1px solid rgba(255,255,255,.2);
+  border-radius:12px;
+  padding:9px 15px;
+  font-size:13px;
+}
+
+/* =========================
+   MAIN
+========================= */
+
 main{
-max-width:980px;
-margin:20px auto;
-padding:0 14px
+  padding:28px 0 60px;
 }
 
 .card{
-background:var(--card);
-border:1px solid var(--line);
-border-radius:18px;
-padding:18px;
-margin-bottom:16px;
-box-shadow:0 7px 25px #193d1b0b
+  position:relative;
+  background:#fff;
+  border:1px solid var(--border);
+  border-radius:20px;
+  padding:25px;
+  margin-bottom:22px;
+  box-shadow:var(--shadow);
+  overflow:hidden;
 }
 
-h2{
-font-size:18px;
-margin:0 0 14px;
-color:var(--green)
+.section-title{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  color:var(--green);
+  margin:0 0 20px;
+  font-size:19px;
+  font-weight:800;
 }
+
+.section-title::after{
+  content:"";
+  height:2px;
+  flex:1;
+  background:linear-gradient(to left,transparent,var(--gold));
+  margin-right:10px;
+}
+
+/* =========================
+   FORM
+========================= */
 
 .grid{
-display:grid;
-grid-template-columns:repeat(2,1fr);
-gap:12px
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:15px;
 }
 
-.field label{
-display:block;
-font-size:13px;
-font-weight:600;
-margin-bottom:6px
+.field{
+  display:flex;
+  flex-direction:column;
+  gap:6px;
 }
 
-.field input,
-.field select,
-.field textarea{
-width:100%;
-border:1px solid #d9d8cf;
-border-radius:11px;
-padding:11px;
-font:inherit;
-background:#fff
+.field.full{
+  grid-column:1/-1;
 }
 
-.field textarea{
-min-height:80px;
-resize:vertical
+label{
+  font-size:13px;
+  font-weight:600;
+  color:#4f5951;
 }
 
-.full{
-grid-column:1/-1
+input,
+select,
+textarea{
+  width:100%;
+  border:1px solid #d7dfd7;
+  border-radius:11px;
+  padding:11px 13px;
+  background:#fff;
+  color:var(--text);
+  outline:none;
+  transition:.2s;
 }
 
-.q{
-padding:15px 0;
-border-top:1px solid #eee
+input:focus,
+select:focus,
+textarea:focus{
+  border-color:var(--green2);
+  box-shadow:0 0 0 3px rgba(40,107,50,.08);
 }
 
-.q:first-child{
-border-top:0
+textarea{
+  resize:vertical;
+  min-height:90px;
 }
 
-.q-title{
-font-weight:700;
-font-size:14px;
-margin-bottom:10px
+/* =========================
+   QUESTIONS
+========================= */
+
+.question{
+  border:1px solid var(--border);
+  border-radius:15px;
+  padding:17px;
+  margin-bottom:13px;
+  background:#fcfdfc;
+}
+
+.question-title{
+  font-weight:700;
+  margin-bottom:12px;
+  color:var(--green);
 }
 
 .options{
-display:grid;
-grid-template-columns:repeat(4,1fr);
-gap:7px
+  display:grid;
+  grid-template-columns:repeat(5,1fr);
+  gap:8px;
 }
 
-.options label{
-border:1px solid #dddcd3;
-border-radius:10px;
-padding:9px 6px;
-text-align:center;
-font-size:12px;
-cursor:pointer;
-background:#fff
+.option{
+  position:relative;
 }
 
-.options input{
-display:none
+.option input{
+  position:absolute;
+  opacity:0;
+  pointer-events:none;
 }
 
-.options label:has(input:checked){
-background:#edf5eb;
-border-color:#4c8954;
-color:#17451f;
-font-weight:700
+.option label{
+  display:block;
+  text-align:center;
+  border:1px solid #dce3dc;
+  border-radius:10px;
+  padding:8px 5px;
+  font-size:12px;
+  cursor:pointer;
+  background:#fff;
+  transition:.2s;
 }
+
+.option input:checked + label{
+  background:var(--green);
+  border-color:var(--green);
+  color:#fff;
+  box-shadow:0 4px 10px rgba(23,69,31,.18);
+}
+
+/* =========================
+   HUMORS
+========================= */
+
+.humor-grid{
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:15px;
+}
+
+.humor-card{
+  border:1px solid var(--border);
+  border-radius:15px;
+  padding:16px;
+  background:#fff;
+}
+
+.humor-card h3{
+  margin:0 0 12px;
+  font-size:16px;
+}
+
+.humor-options{
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:7px;
+}
+
+.humor-option{
+  position:relative;
+}
+
+.humor-option input{
+  position:absolute;
+  opacity:0;
+}
+
+.humor-option label{
+  display:block;
+  padding:7px;
+  text-align:center;
+  border:1px solid #e1e6e1;
+  border-radius:9px;
+  cursor:pointer;
+  font-size:12px;
+}
+
+.humor-option input:checked + label{
+  background:var(--green);
+  color:#fff;
+  border-color:var(--green);
+}
+
+/* =========================
+   BUTTONS
+========================= */
 
 .actions{
-display:flex;
-gap:10px;
-flex-wrap:wrap
+  display:flex;
+  flex-wrap:wrap;
+  gap:10px;
+  margin-top:20px;
 }
 
 .btn{
-border:0;
-border-radius:12px;
-padding:12px 18px;
-font:inherit;
-font-weight:700;
-cursor:pointer
+  border:0;
+  border-radius:11px;
+  padding:11px 18px;
+  font-weight:700;
+  transition:.2s;
 }
 
-.primary{
-background:var(--green);
-color:#fff
+.btn:hover{
+  transform:translateY(-1px);
 }
 
-.secondary{
-background:#eeeadd;
-color:#304334
+.btn-primary{
+  background:var(--green);
+  color:#fff;
 }
 
-.danger{
-background:#fbeaea;
-color:var(--danger)
+.btn-primary:hover{
+  background:var(--green2);
 }
 
-.result{
-display:none
+.btn-gold{
+  background:var(--gold);
+  color:#fff;
 }
 
-.result.show{
-display:block
+.btn-light{
+  background:#eef3ee;
+  color:var(--green);
 }
 
-.scoregrid{
-display:grid;
-grid-template-columns:1fr 1fr;
-gap:12px
+.btn-danger{
+  background:#fbeaea;
+  color:#b51e1e;
 }
 
-.score{
-padding:15px;
-border-radius:14px;
-background:#f5f7f0;
-border:1px solid #e1e7da
+/* =========================
+   REPORT
+========================= */
+
+.report{
+  position:relative;
+  overflow:hidden;
 }
 
-.score b{
-font-size:20px;
-color:var(--green)
+.report .watermark{
+  position:absolute;
+  inset:0;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  pointer-events:none;
+  z-index:0;
 }
 
-.badge{
-display:inline-block;
-padding:6px 11px;
-border-radius:999px;
-background:#eaf4e8;
-color:var(--green);
-font-weight:700;
-font-size:13px
+.watermark img{
+  width:min(480px,65%);
+  opacity:.045;
+  filter:grayscale(1);
 }
 
-.note{
-font-size:12px;
-color:var(--muted);
-line-height:1.9
+.report > *:not(.watermark){
+  position:relative;
+  z-index:1;
 }
 
-table{
-width:100%;
-border-collapse:collapse;
-font-size:13px
+/* Report Header */
+
+.report-header{
+  display:grid;
+  grid-template-columns:100px 1fr 180px;
+  align-items:center;
+  gap:18px;
+  border-bottom:3px double var(--gold);
+  padding-bottom:18px;
+  margin-bottom:18px;
 }
 
-th,td{
-padding:9px;
-border-bottom:1px solid #eee;
-text-align:right
+.report-logo{
+  width:90px;
+  height:90px;
+  object-fit:contain;
 }
 
-th{
-background:#f5f5ef
+.report-title{
+  text-align:center;
 }
 
-.case{
-display:flex;
-justify-content:space-between;
-gap:10px;
-align-items:center;
-border-bottom:1px solid #eee;
-padding:10px 0
+.report-title h2{
+  color:var(--green);
+  margin:0;
+  font-size:23px;
+  font-weight:800;
 }
 
-.case:last-child{
-border:0
+.report-title p{
+  margin:4px 0 0;
+  color:var(--muted);
+  font-size:12px;
 }
 
-footer{
-text-align:center;
-color:#777;
-font-size:11px;
-padding:20px
+.report-meta{
+  text-align:left;
+  font-size:11px;
+  color:var(--muted);
+  direction:rtl;
 }
 
-@media(max-width:650px){
-
-.grid,
-.scoregrid{
-grid-template-columns:1fr
+.report-meta strong{
+  color:var(--green);
 }
 
-.options{
-grid-template-columns:repeat(2,1fr)
+/* Patient */
+
+.patient-box{
+  border:1px solid #dce4dc;
+  border-radius:13px;
+  padding:13px 15px;
+  background:rgba(250,252,250,.9);
+  margin-bottom:18px;
 }
 
-.brand img{
-width:60px;
-height:60px
+.patient-grid{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:9px;
 }
 
-.brand h1{
-font-size:18px
+.patient-item{
+  border-left:1px solid #e1e6e1;
+  padding-left:8px;
+  font-size:12px;
 }
 
+.patient-item:last-child{
+  border-left:0;
+}
+
+.patient-item span{
+  display:block;
+  color:var(--muted);
+  font-size:10px;
+}
+
+.patient-item strong{
+  color:var(--green);
+}
+
+/* Result */
+
+.result-hero{
+  border-radius:17px;
+  padding:20px;
+  text-align:center;
+  border:1px solid var(--border);
+  margin-bottom:18px;
+}
+
+.result-hero h2{
+  margin:3px 0;
+  font-size:27px;
+}
+
+.result-hero p{
+  margin:5px 0 0;
+  font-size:13px;
+}
+
+.result-hero.temperament-damavi{
+  background:var(--red-light);
+  color:var(--red);
+  border-color:#efbaba;
+}
+
+.result-hero.temperament-safrav{
+  background:var(--fire-light);
+  color:#b26b00;
+  border-color:#efd48c;
+}
+
+.result-hero.temperament-balghami{
+  background:var(--blue-light);
+  color:var(--blue);
+  border-color:#b8d9eb;
+}
+
+.result-hero.temperament-sodavi{
+  background:var(--earth-light);
+  color:var(--earth);
+  border-color:#d9c5aa;
+}
+
+.result-hero.temperament-neutral{
+  background:#f0f3f0;
+  color:var(--green);
+}
+
+/* Result stats */
+
+.result-stats{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:12px;
+  margin-bottom:18px;
+}
+
+.stat{
+  border:1px solid var(--border);
+  border-radius:13px;
+  padding:13px;
+  text-align:center;
+  background:rgba(255,255,255,.9);
+}
+
+.stat span{
+  display:block;
+  color:var(--muted);
+  font-size:11px;
+}
+
+.stat strong{
+  display:block;
+  color:var(--green);
+  font-size:17px;
+  margin-top:3px;
+}
+
+/* Description */
+
+.description-box{
+  border-right:4px solid var(--gold);
+  background:var(--gold-light);
+  border-radius:10px;
+  padding:13px 16px;
+  font-size:13px;
+  margin-bottom:18px;
+}
+
+/* =========================
+   CHART
+========================= */
+
+.chart-box{
+  border:1px solid var(--border);
+  border-radius:15px;
+  padding:18px;
+  background:rgba(255,255,255,.92);
+  margin-bottom:18px;
+}
+
+.chart-title{
+  margin:0 0 17px;
+  color:var(--green);
+  font-size:15px;
+  font-weight:800;
+}
+
+.chart{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:18px;
+  align-items:end;
+  height:210px;
+  padding:10px 15px 0;
+  border-bottom:1px solid #dfe5df;
+}
+
+.chart-column{
+  height:100%;
+  display:flex;
+  flex-direction:column;
+  justify-content:flex-end;
+  align-items:center;
+  gap:7px;
+}
+
+.chart-value{
+  font-size:12px;
+  font-weight:800;
+}
+
+.chart-bar-wrap{
+  width:58px;
+  height:150px;
+  display:flex;
+  align-items:flex-end;
+  justify-content:center;
+}
+
+.chart-bar{
+  width:100%;
+  min-height:4px;
+  height:0;
+  border-radius:9px 9px 2px 2px;
+  transition:height 1s ease;
+}
+
+.chart-label{
+  font-size:11px;
+  font-weight:700;
+}
+
+.chart-damavi{
+  background:var(--red);
+}
+
+.chart-safrav{
+  background:var(--fire);
+}
+
+.chart-balghami{
+  background:var(--blue);
+}
+
+.chart-sodavi{
+  background:var(--earth);
+}
+
+.chart-note{
+  margin:12px 0 0;
+  font-size:10px;
+  color:var(--muted);
+  text-align:center;
+}
+
+/* =========================
+   HUMOR RESULT
+========================= */
+
+.humor-results{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:10px;
+  margin-bottom:18px;
+}
+
+.humor-result{
+  border:1px solid var(--border);
+  border-radius:12px;
+  padding:11px;
+  background:#fff;
+}
+
+.humor-result-top{
+  display:flex;
+  align-items:center;
+  gap:7px;
+  font-size:12px;
+  font-weight:700;
+}
+
+.dot{
+  width:10px;
+  height:10px;
+  border-radius:50%;
+  display:inline-block;
+}
+
+.dot-damavi{background:var(--red)}
+.dot-safrav{background:var(--fire)}
+.dot-balghami{background:var(--blue)}
+.dot-sodavi{background:var(--earth)}
+
+.progress{
+  height:7px;
+  border-radius:20px;
+  background:#edf0ed;
+  overflow:hidden;
+  margin-top:7px;
+}
+
+.progress span{
+  display:block;
+  height:100%;
+  border-radius:20px;
+}
+
+/* =========================
+   CLINICAL NOTE
+========================= */
+
+.clinical-note{
+  border:1px dashed #c8d1c8;
+  border-radius:12px;
+  min-height:110px;
+  padding:13px;
+  margin-top:16px;
+}
+
+.clinical-note-title{
+  color:var(--green);
+  font-weight:800;
+  font-size:13px;
+  margin-bottom:7px;
+}
+
+/* Signature */
+
+.signature-area{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:50px;
+  margin-top:35px;
+  padding-top:18px;
+}
+
+.signature-box{
+  text-align:center;
+  font-size:12px;
+  color:var(--muted);
+}
+
+.signature-line{
+  border-top:1px solid #9ba59b;
+  margin-top:42px;
+  padding-top:7px;
+}
+
+/* =========================
+   SAVED CASES
+========================= */
+
+.case-list{
+  display:flex;
+  flex-direction:column;
+  gap:8px;
+}
+
+.case-item{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:12px;
+  padding:12px 14px;
+  background:#fafcf9;
+  border:1px solid var(--border);
+  border-radius:11px;
+}
+
+.case-info{
+  font-size:12px;
+}
+
+.case-info strong{
+  color:var(--green);
+}
+
+.case-actions{
+  display:flex;
+  gap:5px;
+}
+
+/* =========================
+   FOOTER
+========================= */
+
+.footer{
+  text-align:center;
+  color:var(--muted);
+  font-size:11px;
+  padding:15px 0 30px;
+}
+
+/* =========================
+   PRINT
+========================= */
+
+.print-only{
+  display:none;
 }
 
 @media print{
 
-header,
-.actions,
-.intake,
-.questions,
-.cases,
-footer{
-display:none!important
+  @page{
+    size:A4;
+    margin:12mm;
+  }
+
+  html,
+  body{
+    background:#fff !important;
+    margin:0 !important;
+    padding:0 !important;
+  }
+
+  body{
+    font-size:11px;
+  }
+
+  .no-print,
+  header,
+  .header,
+  .actions,
+  .footer,
+  .form-section,
+  .questions-section,
+  .humors-section,
+  .cases-section{
+    display:none !important;
+  }
+
+  main{
+    padding:0 !important;
+  }
+
+  .container{
+    width:100% !important;
+    max-width:none !important;
+    margin:0 !important;
+  }
+
+  .card.report{
+    display:block !important;
+    border:0 !important;
+    box-shadow:none !important;
+    border-radius:0 !important;
+    padding:0 !important;
+    margin:0 !important;
+    overflow:visible !important;
+  }
+
+  .report-header{
+    grid-template-columns:75px 1fr 150px;
+    padding-bottom:10px;
+    margin-bottom:12px;
+  }
+
+  .report-logo{
+    width:65px;
+    height:65px;
+  }
+
+  .report-title h2{
+    font-size:19px;
+  }
+
+  .report-title p{
+    font-size:9px;
+  }
+
+  .report-meta{
+    font-size:8px;
+  }
+
+  .patient-box{
+    padding:8px 10px;
+    margin-bottom:10px;
+  }
+
+  .patient-item{
+    font-size:9px;
+  }
+
+  .patient-item span{
+    font-size:8px;
+  }
+
+  .result-hero{
+    padding:12px;
+    margin-bottom:10px;
+  }
+
+  .result-hero h2{
+    font-size:20px;
+  }
+
+  .result-hero p{
+    font-size:9px;
+  }
+
+  .result-stats{
+    margin-bottom:10px;
+    gap:7px;
+  }
+
+  .stat{
+    padding:7px;
+  }
+
+  .stat span{
+    font-size:8px;
+  }
+
+  .stat strong{
+    font-size:12px;
+  }
+
+  .description-box{
+    padding:8px 10px;
+    font-size:9px;
+    margin-bottom:10px;
+  }
+
+  .chart-box{
+    padding:10px;
+    margin-bottom:10px;
+  }
+
+  .chart-title{
+    font-size:11px;
+    margin-bottom:8px;
+  }
+
+  .chart{
+    height:155px;
+  }
+
+  .chart-bar-wrap{
+    height:105px;
+  }
+
+  .chart-bar{
+    print-color-adjust:exact;
+    -webkit-print-color-adjust:exact;
+  }
+
+  .chart-value,
+  .chart-label{
+    font-size:8px;
+  }
+
+  .chart-note{
+    font-size:7px;
+    margin-top:5px;
+  }
+
+  .humor-results{
+    gap:6px;
+    margin-bottom:10px;
+  }
+
+  .humor-result{
+    padding:7px;
+  }
+
+  .humor-result-top{
+    font-size:8px;
+  }
+
+  .progress{
+    height:4px;
+  }
+
+  .clinical-note{
+    min-height:75px;
+    padding:8px;
+    font-size:9px;
+  }
+
+  .clinical-note-title{
+    font-size:9px;
+  }
+
+  .signature-area{
+    margin-top:20px;
+    padding-top:10px;
+  }
+
+  .signature-box{
+    font-size:9px;
+  }
+
+  .signature-line{
+    margin-top:28px;
+  }
+
+  .watermark img{
+    opacity:.035;
+  }
 }
 
-main{
-margin:0;
-max-width:none
+/* =========================
+   RESPONSIVE
+========================= */
+
+@media(max-width:850px){
+
+  .grid{
+    grid-template-columns:repeat(2,1fr);
+  }
+
+  .patient-grid{
+    grid-template-columns:repeat(2,1fr);
+  }
+
+  .patient-item{
+    border-left:0;
+  }
+
+  .options{
+    grid-template-columns:repeat(2,1fr);
+  }
+
+  .humor-grid{
+    grid-template-columns:1fr;
+  }
+
+  .humor-results{
+    grid-template-columns:repeat(2,1fr);
+  }
+
+  .report-header{
+    grid-template-columns:70px 1fr;
+  }
+
+  .report-meta{
+    grid-column:1/-1;
+    text-align:center;
+  }
 }
 
-.result{
-display:block!important
-}
+@media(max-width:600px){
 
-.card{
-box-shadow:none
-}
+  .container{
+    width:min(100% - 18px,1180px);
+  }
 
+  .header-inner{
+    flex-direction:column;
+    text-align:center;
+  }
+
+  .brand{
+    flex-direction:column;
+  }
+
+  .grid{
+    grid-template-columns:1fr;
+  }
+
+  .field.full{
+    grid-column:auto;
+  }
+
+  .patient-grid{
+    grid-template-columns:1fr 1fr;
+  }
+
+  .result-stats{
+    grid-template-columns:1fr;
+  }
+
+  .humor-results{
+    grid-template-columns:1fr 1fr;
+  }
+
+  .signature-area{
+    grid-template-columns:1fr;
+    gap:20px;
+  }
 }
 </style>
 </head>
 
 <body>
 
-<header>
-<div class="brand">
+<!-- =========================
+     HEADER
+========================= -->
 
-<img src="logo.png" alt="لوگوی حکیم آذربایجان">
+<header class="header">
+  <div class="container header-inner">
 
-<div>
-<h1>سلامتکده و عطاری حکیم آذربایجان</h1>
-<p>سامانه حرفه‌ای ارزیابی مزاج و بررسی غلبه اخلاط</p>
-</div>
+    <div class="brand">
+      <img src="logo.png" class="brand-logo" alt="لوگوی سلامتکده">
+      <div>
+        <h1>سلامتکده و عطاری حکیم آذربایجان</h1>
+        <p>سامانه ارزیابی مزاج و اخلاط چهارگانه</p>
+      </div>
+    </div>
 
-</div>
+    <div class="header-badge">
+      گزارش ارزیابی مزاج
+    </div>
+
+  </div>
 </header>
 
 <main>
+<div class="container">
 
-<section class="card intake">
+<!-- =========================
+     INTAKE
+========================= -->
 
-<h2>۱) مشخصات مراجعه‌کننده</h2>
+<section class="card form-section">
 
-<div class="grid">
+  <h2 class="section-title">👤 اطلاعات مراجعه‌کننده</h2>
 
-<div class="field">
-<label>نام و نام خانوادگی</label>
-<input id="name">
-</div>
+  <div class="grid">
 
-<div class="field">
-<label>شماره پرونده</label>
-<input id="caseNo">
-</div>
+    <div class="field">
+      <label for="name">نام و نام خانوادگی</label>
+      <input id="name" type="text" placeholder="نام مراجعه‌کننده">
+    </div>
 
-<div class="field">
-<label>سن</label>
-<input id="age" type="number" min="0">
-</div>
+    <div class="field">
+      <label for="caseNo">شماره پرونده</label>
+      <input id="caseNo" type="text" placeholder="شماره پرونده">
+    </div>
 
-<div class="field">
-<label>جنسیت</label>
+    <div class="field">
+      <label for="age">سن</label>
+      <input id="age" type="number" min="1" max="120" placeholder="سن">
+    </div>
 
-<select id="sex">
+    <div class="field">
+      <label for="sex">جنسیت</label>
+      <select id="sex">
+        <option value="">انتخاب کنید</option>
+        <option value="مرد">مرد</option>
+        <option value="زن">زن</option>
+      </select>
+    </div>
 
-<option value="">انتخاب کنید</option>
-<option>زن</option>
-<option>مرد</option>
+    <div class="field">
+      <label for="phone">شماره تماس</label>
+      <input id="phone" type="tel" placeholder="شماره تماس">
+    </div>
 
-</select>
+    <div class="field">
+      <label for="date">تاریخ ارزیابی</label>
+      <input id="date" type="date">
+    </div>
 
-</div>
+    <div class="field full">
+      <label for="initialNote">یادداشت اولیه</label>
+      <textarea id="initialNote" placeholder="توضیحات اولیه، شکایت اصلی یا نکات مهم مراجعه‌کننده..."></textarea>
+    </div>
 
-<div class="field">
-<label>شماره تماس</label>
-<input id="phone" inputmode="tel">
-</div>
-
-<div class="field">
-<label>تاریخ ارزیابی</label>
-<input id="date" type="date">
-</div>
-
-<div class="field full">
-<label>یادداشت اولیه درمانگر</label>
-<textarea id="initialNote"></textarea>
-</div>
-
-</div>
-
-</section>
-
-
-<section class="card questions">
-
-<h2>۲) ارزیابی مزاج ذاتی</h2>
-
-<p class="note">
-برای هر مورد، نزدیک‌ترین گزینه را انتخاب کنید.
-امتیاز داخلی هر پاسخ در چهار سطح از «خیلی سرد/خیلی خشک»
-تا «خیلی گرم/خیلی تر» تعریف شده و با وزن سؤال در دو محور
-گرمی/سردی و تری/خشکی محاسبه می‌شود.
-</p>
-
-<div id="questions"></div>
+  </div>
 
 </section>
 
+<!-- =========================
+     QUESTIONS
+========================= -->
 
-<section class="card questions">
+<section class="card questions-section">
 
-<h2>۳) غربالگری غلبه اخلاط فعلی</h2>
+  <h2 class="section-title">🌿 پرسش‌های ارزیابی مزاج</h2>
 
-<p class="note">
-شدت هر علامت را از «ندارد» تا «شدید» مشخص کنید.
-این بخش از مزاج ذاتی جداست و صرفاً غربالگری است.
-</p>
-
-<div id="humors"></div>
+  <div id="questions"></div>
 
 </section>
 
+<!-- =========================
+     HUMORS
+========================= -->
 
-<section class="card actions questions">
+<section class="card humors-section">
 
-<button class="btn primary" onclick="calculate()">
-محاسبه و نمایش نتیجه
-</button>
+  <h2 class="section-title">🧪 ارزیابی اخلاط چهارگانه</h2>
 
-<button class="btn secondary" onclick="window.print()">
-چاپ / ذخیره PDF
-</button>
-
-<button class="btn secondary" onclick="saveCase()">
-ذخیره پرونده
-</button>
+  <div class="humor-grid" id="humors"></div>
 
 </section>
 
+<!-- =========================
+     ACTIONS
+========================= -->
 
-<section class="card result" id="result">
+<section class="card actions no-print">
 
-<h2>گزارش ارزیابی</h2>
+  <button class="btn btn-primary" onclick="calculate()">
+    🔎 محاسبه و نمایش نتیجه
+  </button>
 
-<div id="report"></div>
+  <button class="btn btn-gold" onclick="saveCase()">
+    💾 ذخیره پرونده
+  </button>
+
+  <button class="btn btn-light" onclick="printReport()">
+    🖨️ چاپ / ذخیره PDF
+  </button>
+
+  <button class="btn btn-light" onclick="resetForm()">
+    🔄 شروع ارزیابی جدید
+  </button>
 
 </section>
 
+<!-- =========================
+     REPORT
+========================= -->
 
-<section class="card cases">
+<section id="report" class="card report" style="display:none;">
 
-<h2>پرونده‌های ذخیره‌شده روی این دستگاه</h2>
+  <div class="watermark">
+    <img src="logo.png" alt="">
+  </div>
 
-<div id="caseList" class="note">
-هنوز پرونده‌ای ذخیره نشده است.
+  <!-- Report Header -->
+
+  <div class="report-header">
+
+    <img src="logo.png" class="report-logo" alt="لوگوی حکیم آذربایجان">
+
+    <div class="report-title">
+      <h2>سلامتکده و عطاری حکیم آذربایجان</h2>
+      <p>گزارش حرفه‌ای ارزیابی مزاج و اخلاط چهارگانه</p>
+    </div>
+
+    <div class="report-meta">
+      <div>تاریخ: <strong id="rDate">—</strong></div>
+      <div>شماره پرونده: <strong id="rCaseNo">—</strong></div>
+      <div>نوع گزارش: ارزیابی مزاج</div>
+    </div>
+
+  </div>
+
+  <!-- Patient -->
+
+  <div class="patient-box">
+
+    <div class="patient-grid">
+
+      <div class="patient-item">
+        <span>نام و نام خانوادگی</span>
+        <strong id="rName">—</strong>
+      </div>
+
+      <div class="patient-item">
+        <span>سن</span>
+        <strong id="rAge">—</strong>
+      </div>
+
+      <div class="patient-item">
+        <span>جنسیت</span>
+        <strong id="rSex">—</strong>
+      </div>
+
+      <div class="patient-item">
+        <span>شماره تماس</span>
+        <strong id="rPhone">—</strong>
+      </div>
+
+    </div>
+
+  </div>
+
+  <!-- Result -->
+
+  <div id="resultHero" class="result-hero">
+
+    <div>نتیجه ارزیابی</div>
+
+    <h2 id="resultTitle">—</h2>
+
+    <p id="resultSubtitle">برای مشاهده نتیجه، ارزیابی را محاسبه کنید.</p>
+
+  </div>
+
+  <!-- Stats -->
+
+  <div class="result-stats">
+
+    <div class="stat">
+      <span>محور حرارتی</span>
+      <strong id="thermalResult">—</strong>
+    </div>
+
+    <div class="stat">
+      <span>محور رطوبتی</span>
+      <strong id="moistureResult">—</strong>
+    </div>
+
+    <div class="stat">
+      <span>وضوح نتیجه</span>
+      <strong id="clarityResult">—</strong>
+    </div>
+
+  </div>
+
+  <!-- Description -->
+
+  <div class="description-box" id="temperamentDescription">
+    —
+  </div>
+
+  <!-- Chart -->
+
+  <div class="chart-box">
+
+    <h3 class="chart-title">
+      📊 نمودار درصدی الگوهای مزاجی
+    </h3>
+
+    <div class="chart">
+
+      <div class="chart-column">
+
+        <div class="chart-value" id="chartDamaviValue">0%</div>
+
+        <div class="chart-bar-wrap">
+          <div id="chartDamavi" class="chart-bar chart-damavi" data-height="0"></div>
+        </div>
+
+        <div class="chart-label">🔴 دموی</div>
+
+      </div>
+
+      <div class="chart-column">
+
+        <div class="chart-value" id="chartSafravValue">0%</div>
+
+        <div class="chart-bar-wrap">
+          <div id="chartSafrav" class="chart-bar chart-safrav" data-height="0"></div>
+        </div>
+
+        <div class="chart-label">🟡 صفراوی</div>
+
+      </div>
+
+      <div class="chart-column">
+
+        <div class="chart-value" id="chartBalghamValue">0%</div>
+
+        <div class="chart-bar-wrap">
+          <div id="chartBalgham" class="chart-bar chart-balghami" data-height="0"></div>
+        </div>
+
+        <div class="chart-label">🔵 بلغمی</div>
+
+      </div>
+
+      <div class="chart-column">
+
+        <div class="chart-value" id="chartSodaValue">0%</div>
+
+        <div class="chart-bar-wrap">
+          <div id="chartSoda" class="chart-bar chart-sodavi" data-height="0"></div>
+        </div>
+
+        <div class="chart-label">🟤 سوداوی</div>
+
+      </div>
+
+    </div>
+
+    <p class="chart-note">
+      درصدهای نمودار، شاخص‌های نسبی حاصل از پاسخ‌های این فرم هستند و به‌تنهایی
+      به معنای احتمال تشخیصی یا تشخیص پزشکی نیستند.
+    </p>
+
+  </div>
+
+  <!-- Humors -->
+
+  <div class="humor-results">
+
+    <div class="humor-result">
+      <div class="humor-result-top">
+        <span class="dot dot-damavi"></span>
+        دموی
+        <strong id="damaviScore" style="margin-right:auto;">0/18</strong>
+      </div>
+      <div class="progress">
+        <span id="damaviProgress" class="chart-damavi" style="width:0%"></span>
+      </div>
+    </div>
+
+    <div class="humor-result">
+      <div class="humor-result-top">
+        <span class="dot dot-safrav"></span>
+        صفراوی
+        <strong id="safravScore" style="margin-right:auto;">0/18</strong>
+      </div>
+      <div class="progress">
+        <span id="safravProgress" class="chart-safrav" style="width:0%"></span>
+      </div>
+    </div>
+
+    <div class="humor-result">
+      <div class="humor-result-top">
+        <span class="dot dot-balghami"></span>
+        بلغمی
+        <strong id="balghamScore" style="margin-right:auto;">0/18</strong>
+      </div>
+      <div class="progress">
+        <span id="balghamProgress" class="chart-balghami" style="width:0%"></span>
+      </div>
+    </div>
+
+    <div class="humor-result">
+      <div class="humor-result-top">
+        <span class="dot dot-sodavi"></span>
+        سوداوی
+        <strong id="sodaScore" style="margin-right:auto;">0/18</strong>
+      </div>
+      <div class="progress">
+        <span id="sodaProgress" class="chart-sodavi" style="width:0%"></span>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Clinical Note -->
+
+  <div class="clinical-note">
+
+    <div class="clinical-note-title">
+      📝 یادداشت و توضیحات درمانگر
+    </div>
+
+    <div id="reportInitialNote">
+      —
+    </div>
+
+  </div>
+
+  <!-- Signature -->
+
+  <div class="signature-area">
+
+    <div class="signature-box">
+      <div class="signature-line">
+        نام و امضای درمانگر / کارشناس
+      </div>
+    </div>
+
+    <div class="signature-box">
+      <div class="signature-line">
+        مهر سلامتکده و عطاری حکیم آذربایجان
+      </div>
+    </div>
+
+  </div>
+
+</section>
+
+<!-- =========================
+     SAVED CASES
+========================= -->
+
+<section class="card cases-section">
+
+  <h2 class="section-title">📁 پرونده‌های ذخیره‌شده</h2>
+
+  <div id="caseList" class="case-list"></div>
+
+</section>
+
 </div>
-
-</section>
-
 </main>
 
-
-<footer>
-حکیم آذربایجان — این ابزار یک مدل غربالگری است و جایگزین تشخیص و ارزیابی بالینی نیست.
+<footer class="footer">
+  سلامتکده و عطاری حکیم آذربایجان
+  <br>
+  سامانه ارزیابی مزاج
 </footer>
-
 
 <script>
 
-const qs=[
+/* =========================================================
+   DATA
+========================================================= */
 
-["عملکرد بدنی – سرعت و فعالیت",3,[-2,-1,1,2],[-1,-1,1,1]],
+const qs = [
 
-["عملکرد بدنی – انرژی و توان",3,[-2,-1,1,2],[-1,-1,1,1]],
+  {
+    text:"بدن شما معمولاً چه احساسی دارد؟",
+    weight:1,
+    thermal:[-2,-1,0,1,2],
+    moisture:[0,0,0,0,0]
+  },
 
-["پاسخ اندام‌ها به گرما/سرما",3,[-2,-1,1,2],[-1,-1,1,1]],
+  {
+    text:"در فصل گرما وضعیت بدنی شما چگونه است؟",
+    weight:1,
+    thermal:[-2,-1,0,1,2],
+    moisture:[0,0,0,0,0]
+  },
 
-["ساختار بدنی و جثه",3,[-1,-1,1,1],[-2,-1,1,2]],
+  {
+    text:"در فصل سرما وضعیت بدنی شما چگونه است؟",
+    weight:1,
+    thermal:[2,1,0,-1,-2],
+    moisture:[0,0,0,0,0]
+  },
 
-["پوست",2,[-1,-1,1,1],[-2,-1,1,2]],
+  {
+    text:"پوست شما معمولاً چگونه است؟",
+    weight:1,
+    thermal:[0,0,0,0,0],
+    moisture:[2,1,0,-1,-2]
+  },
 
-["مو",1,[-1,-1,1,1],[-2,-1,1,2]],
+  {
+    text:"میزان تعریق شما چگونه است؟",
+    weight:1,
+    thermal:[1,1,0,-1,-1],
+    moisture:[2,1,0,-1,-2]
+  },
 
-["تعریق",2,[-1,-1,1,2],[-2,-1,1,2]],
+  {
+    text:"تشنگی شما معمولاً چقدر است؟",
+    weight:1,
+    thermal:[1,1,0,0,0],
+    moisture:[-2,-1,0,1,2]
+  },
 
-["دهان و زبان",2,[-1,-1,1,1],[-2,-1,1,2]],
+  {
+    text:"اشتها و میل شما به غذا چگونه است؟",
+    weight:1,
+    thermal:[2,1,0,-1,-2],
+    moisture:[0,0,0,0,0]
+  },
 
-["گوارش",3,[-2,-1,1,2],[-1,-1,1,1]],
+  {
+    text:"هضم غذا در شما چگونه است؟",
+    weight:1,
+    thermal:[1,1,0,-1,-1],
+    moisture:[0,0,0,0,0]
+  },
 
-["مدفوع",2,[-1,-1,1,1],[-2,-1,1,2]],
+  {
+    text:"الگوی خواب شما چگونه است؟",
+    weight:1,
+    thermal:[0,0,0,0,0],
+    moisture:[-1,-1,0,1,2]
+  },
 
-["خواب",2,[-1,-1,1,-1],[-1,-1,1,2]],
+  {
+    text:"سطح انرژی روزانه شما چگونه است؟",
+    weight:1,
+    thermal:[2,1,0,-1,-2],
+    moisture:[0,0,0,0,0]
+  },
 
-["اشتها و تشنگی",2,[-2,-1,1,2],[-1,-1,1,2]],
+  {
+    text:"خلق‌وخو و تحریک‌پذیری شما چگونه است؟",
+    weight:1,
+    thermal:[2,1,0,-1,-2],
+    moisture:[0,0,0,0,0]
+  },
 
-["حرکت و عضلات",2,[-2,-1,1,2],[-1,-1,1,1]],
+  {
+    text:"سرعت صحبت کردن و حرکات شما چگونه است؟",
+    weight:1,
+    thermal:[2,1,0,-1,-2],
+    moisture:[0,0,0,0,0]
+  },
 
-["چشم",1,[-1,-1,1,1],[-2,-1,1,2]],
+  {
+    text:"وزن بدن شما معمولاً چگونه تغییر می‌کند؟",
+    weight:1,
+    thermal:[0,0,0,0,0],
+    moisture:[-2,-1,0,1,2]
+  },
 
-["میل جنسی",1,[-2,-1,1,2],[-1,-1,1,1]],
+  {
+    text:"تمایل شما به نوشیدن آب چگونه است؟",
+    weight:1,
+    thermal:[0,0,0,0,0],
+    moisture:[-2,-1,0,1,2]
+  },
 
-["سرعت واکنش",2,[-2,-1,1,2],[-1,-1,1,1]],
+  {
+    text:"وضعیت دفع شما معمولاً چگونه است؟",
+    weight:1,
+    thermal:[0,0,0,0,0],
+    moisture:[-2,-1,0,1,2]
+  },
 
-["ویژگی ذهنی",1,[-1,-1,1,2],[-1,-1,1,1]],
+  {
+    text:"رنگ چهره شما معمولاً چگونه است؟",
+    weight:1,
+    thermal:[1,1,0,-1,-1],
+    moisture:[0,0,0,0,0]
+  },
 
-["گرایش حرارتی",3,[-2,-1,1,2],[-1,-1,1,1]],
+  {
+    text:"دست و پای شما معمولاً چه حالتی دارد؟",
+    weight:1,
+    thermal:[-2,-1,0,1,2],
+    moisture:[0,0,0,0,0]
+  },
 
-["رطوبت بدن",2,[-1,-1,1,1],[-2,-1,1,2]],
+  {
+    text:"واکنش شما به استرس چگونه است؟",
+    weight:1,
+    thermal:[2,1,0,-1,-2],
+    moisture:[0,0,0,0,0]
+  },
 
-["رنگ پوست و قوام بدن",1,[-1,-1,1,1],[-2,-1,1,2]]
+  {
+    text:"تمرکز و فعالیت ذهنی شما چگونه است؟",
+    weight:1,
+    thermal:[1,1,0,-1,-1],
+    moisture:[-1,-1,0,1,2]
+  },
+
+  {
+    text:"تحمل شما در برابر فعالیت بدنی چگونه است؟",
+    weight:1,
+    thermal:[2,1,0,-1,-2],
+    moisture:[0,0,0,0,0]
+  }
+
+];
+
+const labelsByQ = [
+  ["خیلی سرد","سرد","متعادل","گرم","خیلی گرم"],
+  ["خیلی بد","بد","متوسط","خوب","خیلی خوب"],
+  ["خیلی خوب","خوب","متوسط","بد","خیلی بد"],
+  ["خیلی خشک","خشک","متعادل","مرطوب","خیلی مرطوب"],
+  ["خیلی کم","کم","متوسط","زیاد","خیلی زیاد"],
+  ["خیلی زیاد","زیاد","متوسط","کم","خیلی کم"],
+  ["خیلی زیاد","زیاد","متوسط","کم","خیلی کم"],
+  ["خیلی ضعیف","ضعیف","متوسط","خوب","خیلی خوب"],
+  ["خیلی کم","کم","متوسط","زیاد","خیلی زیاد"],
+  ["خیلی زیاد","زیاد","متوسط","کم","خیلی کم"],
+  ["خیلی زیاد","زیاد","متوسط","کم","خیلی کم"],
+  ["خیلی سریع","سریع","متوسط","آرام","خیلی آرام"],
+  ["خیلی کم","کم","متعادل","زیاد","خیلی زیاد"],
+  ["خیلی زیاد","زیاد","متوسط","کم","خیلی کم"],
+  ["خیلی خشک","خشک","متعادل","نرم","خیلی نرم"],
+  ["خیلی سرخ","سرخ","متوسط","رنگ‌پریده","خیلی رنگ‌پریده"],
+  ["خیلی سرد","سرد","متعادل","گرم","خیلی گرم"],
+  ["خیلی شدید","شدید","متوسط","ملایم","خیلی ملایم"],
+  ["خیلی زیاد","زیاد","متوسط","کم","خیلی کم"],
+  ["خیلی زیاد","زیاد","متوسط","کم","خیلی کم"]
+];
+
+const humors = [
+
+  {
+    key:"damavi",
+    title:"🔴 دموی",
+    items:[
+      "سرخی چهره",
+      "گرمی بدن",
+      "تعریق زیاد",
+      "خواب نسبتاً خوب",
+      "اشتها مناسب",
+      "نشاط و انرژی"
+    ]
+  },
+
+  {
+    key:"safrav",
+    title:"🟡 صفراوی",
+    items:[
+      "تشنگی زیاد",
+      "گرمی شدید بدن",
+      "خشکی پوست",
+      "کم‌خوابی",
+      "تحریک‌پذیری",
+      "تلخی دهان"
+    ]
+  },
+
+  {
+    key:"balghami",
+    title:"🔵 بلغمی",
+    items:[
+      "سردی بدن",
+      "رطوبت پوست",
+      "خواب زیاد",
+      "کندی حرکات",
+      "اشتها متغیر",
+      "بی‌حالی"
+    ]
+  },
+
+  {
+    key:"sodavi",
+    title:"🟤 سوداوی",
+    items:[
+      "خشکی بدن",
+      "سردی اندام‌ها",
+      "خواب سبک",
+      "فکر زیاد",
+      "نگرانی",
+      "خشکی پوست"
+    ]
+  }
 
 ];
 
 
-const labelsByQ=[
-
-[
-"خیلی کم و کند",
-"کم و کند",
-"متوسط و طبیعی",
-"زیاد و سریع"
-],
-
-[
-"انرژی و توان کم",
-"کمی پایین‌تر از معمول",
-"متوسط و طبیعی",
-"انرژی و توان زیاد"
-],
-
-[
-"زود سرد می‌شوم",
-"کمی متمایل به سردی",
-"در برابر گرما و سرما متعادل هستم",
-"زود گرم می‌شوم"
-],
-
-[
-"لاغر و ظریف",
-"نسبتاً لاغر",
-"جثه متوسط",
-"درشت و پرتر"
-],
-
-[
-"خشک و زبر",
-"کمی خشک",
-"طبیعی و متعادل",
-"نرم و مرطوب"
-],
-
-[
-"کم‌پشت و نازک",
-"نسبتاً کم‌پشت",
-"متوسط",
-"پرپشت و ضخیم"
-],
-
-[
-"تعریق بسیار کم",
-"تعریق کم",
-"تعریق متوسط",
-"تعریق زیاد"
-],
-
-[
-"خشک و کم‌آب",
-"کمی خشک",
-"طبیعی و متعادل",
-"مرطوب و آب‌دار"
-],
-
-[
-"هضم خیلی کند و همراه نفخ",
-"هضم نسبتاً کند",
-"هضم طبیعی",
-"هضم سریع و قوی"
-],
-
-[
-"خشک و سفت",
-"نسبتاً خشک",
-"طبیعی و شکل‌دار",
-"نرم و مرطوب"
-],
-
-[
-"خواب کم و سبک",
-"کمی کم یا سبک",
-"خواب متعادل",
-"خواب زیاد و سنگین"
-],
-
-[
-"اشتها و تشنگی کم",
-"کمی کمتر از معمول",
-"طبیعی و متعادل",
-"اشتها و تشنگی زیاد"
-],
-
-[
-"عضلات ضعیف و توان کم",
-"کمی ضعیف",
-"قدرت و توان متوسط",
-"عضلات قوی و پرتوان"
-],
-
-[
-"کدر و خشک",
-"کمی کدر",
-"طبیعی و متعادل",
-"شفاف و درخشان"
-],
-
-[
-"میل جنسی کم",
-"کمی کمتر از معمول",
-"متوسط و طبیعی",
-"میل جنسی زیاد"
-],
-
-[
-"خیلی کند",
-"کند",
-"متوسط",
-"سریع"
-],
-
-[
-"ذهن آرام و کم‌تحرک",
-"کمی کند یا کم‌تحرک",
-"متعادل و طبیعی",
-"ذهن فعال و سریع"
-],
-
-[
-"بیشتر احساس سرما می‌کنم",
-"کمی متمایل به سرما",
-"متعادل",
-"بیشتر احساس گرما می‌کنم"
-],
+/* =========================================================
+   RENDER QUESTIONS
+========================================================= */
 
-[
-"بدن خشک و کم‌آب",
-"کمی خشک",
-"متعادل",
-"بدن مرطوب و آب‌دار"
-],
+function renderQuestions(){
 
-[
-"رنگ‌پریده و بافت بدن نرم و شل",
-"نسبتاً رنگ‌پریده و بافت بدن نسبتاً نرم",
-"رنگ پوست طبیعی و بافت بدن متعادل و نسبتاً سفت",
-"رنگ پوست پررنگ‌تر و بافت بدن سفت و منسجم"
-]
+  const container = document.getElementById("questions");
 
-];
+  container.innerHTML = qs.map((q,index)=>{
 
+    const labels = labelsByQ[index] || [
+      "خیلی کم",
+      "کم",
+      "متوسط",
+      "زیاد",
+      "خیلی زیاد"
+    ];
 
-const humors={
+    return `
+      <div class="question">
 
-"دموی":[
-"سرخی صورت یا پوست",
-"احساس گرمی بدن",
-"پرخونی یا سنگینی سر",
-"تعریق نسبتاً زیاد",
-"اشتهای خوب همراه با نشاط",
-"احساس پری و سنگینی پس از غذا"
-],
+        <div class="question-title">
+          ${index + 1}. ${q.text}
+        </div>
 
-"صفراوی":[
-"گرمی و خشکی بدن",
-"تلخی یا خشکی دهان",
-"تشنگی زیاد",
-"زود عصبانی شدن",
-"خواب کم یا سبک",
-"سوزش معده یا احساس حرارت"
-],
+        <div class="options">
 
-"بلغمی":[
-"سردی دست و پا",
-"خواب‌آلودگی و کسالت",
-"سنگینی بدن",
-"رطوبت یا آبریزش زیاد",
-"هضم کند و نفخ",
-"تمایل به شیرینی یا غذاهای سنگین"
-],
+          ${labels.map((label,i)=>`
 
-"سوداوی":[
-"خشکی پوست",
-"یبوست یا مدفوع خشک",
-"خواب سبک یا بی‌خوابی",
-"فکر و نگرانی زیاد",
-"لاغری یا تحلیل رفتن بدن",
-"تیرگی یا کدورت رنگ پوست"
-]
+            <div class="option">
 
-};
+              <input
+                type="radio"
+                name="q${index}"
+                id="q${index}_${i}"
+                value="${i}"
+              >
 
+              <label for="q${index}_${i}">
+                ${label}
+              </label>
 
-const qbox=document.getElementById("questions");
+            </div>
 
-qs.forEach((q,i)=>{
+          `).join("")}
 
-let el=document.createElement("div");
+        </div>
 
-el.className="q";
+      </div>
+    `;
 
-el.innerHTML=`
-<div class="q-title">
-${i+1}. ${q[0]}
-<span class="note">(${q[1]} امتیاز)</span>
-</div>
-
-<div class="options">
-
-${labelsByQ[i].map((x,j)=>`
-
-<label>
-
-<input required type="radio"
-name="q${i}"
-value="${j}">
-
-${x}
-
-</label>
-
-`).join("")}
-
-</div>
-`;
-
-qbox.appendChild(el);
-
-});
-
-
-const hbox=document.getElementById("humors");
-
-Object.entries(humors).forEach(([h,items])=>{
-
-let sec=document.createElement("div");
-
-sec.innerHTML=`
-<div class="q-title" style="margin-top:12px">
-${h}
-</div>
-`;
-
-items.forEach((x,j)=>{
-
-sec.innerHTML+=`
-
-<div class="q">
-
-<div class="q-title">
-${x}
-</div>
-
-<div class="options">
-
-${["ندارد","خفیف","متوسط","شدید"].map((t,v)=>`
-
-<label>
-
-<input type="radio"
-name="${h}${j}"
-value="${v}">
-
-${t}
-
-</label>
-
-`).join("")}
-
-</div>
-
-</div>
-
-`;
-
-});
-
-hbox.appendChild(sec);
-
-});
-
-
-document.getElementById("date").value=
-new Date().toISOString().slice(0,10);
-
-
-function val(name){
-
-let x=document.querySelector(
-`input[name="${name}"]:checked`
-);
-
-return x ? +x.value : null;
+  }).join("");
 
 }
 
+
+/* =========================================================
+   RENDER HUMORS
+========================================================= */
+
+function renderHumors(){
+
+  const container = document.getElementById("humors");
+
+  container.innerHTML = humors.map((humor,index)=>`
+
+    <div class="humor-card">
+
+      <h3>${humor.title}</h3>
+
+      <div class="humor-options">
+
+        ${humor.items.map((item,i)=>`
+
+          <div class="humor-option">
+
+            <input
+              type="checkbox"
+              id="humor_${index}_${i}"
+              name="${humor.key}"
+              value="1"
+            >
+
+            <label for="humor_${index}_${i}">
+              ${item}
+            </label>
+
+          </div>
+
+        `).join("")}
+
+      </div>
+
+    </div>
+
+  `).join("");
+
+}
+
+
+/* =========================================================
+   TEMPERAMENT
+========================================================= */
+
+function getTemperament(thermal,moisture){
+
+  let temp = "متعادل / ترکیبی";
+
+  if(thermal >= 12 && moisture >= 12){
+    temp = "دموی";
+  }
+  else if(thermal >= 12 && moisture <= -12){
+    temp = "صفراوی";
+  }
+  else if(thermal <= -12 && moisture >= 12){
+    temp = "بلغمی";
+  }
+  else if(thermal <= -12 && moisture <= -12){
+    temp = "سوداوی";
+  }
+  else if(thermal >= 12){
+    temp = "گرم";
+  }
+  else if(thermal <= -12){
+    temp = "سرد";
+  }
+  else if(moisture >= 12){
+    temp = "تر";
+  }
+  else if(moisture <= -12){
+    temp = "خشک";
+  }
+
+  return temp;
+}
+
+
+function temperamentClass(temp){
+
+  if(temp.includes("دموی")) return "temperament-damavi";
+  if(temp.includes("صفراوی")) return "temperament-safrav";
+  if(temp.includes("بلغمی")) return "temperament-balghami";
+  if(temp.includes("سوداوی")) return "temperament-sodavi";
+
+  return "temperament-neutral";
+}
+
+
+function temperamentDescription(temp){
+
+  const descriptions = {
+
+    "دموی":
+      "الگوی غالب، گرم و تر است. در این ارزیابی شاخص‌های گرمی و رطوبت نسبت به سایر محورهای مزاجی برجسته‌تر بوده‌اند.",
+
+    "صفراوی":
+      "الگوی غالب، گرم و خشک است. شاخص‌های گرمی و خشکی در پاسخ‌های ثبت‌شده برجستگی بیشتری نشان داده‌اند.",
+
+    "بلغمی":
+      "الگوی غالب، سرد و تر است. شاخص‌های سردی و رطوبت در پاسخ‌های ثبت‌شده برجسته‌تر بوده‌اند.",
+
+    "سوداوی":
+      "الگوی غالب، سرد و خشک است. شاخص‌های سردی و خشکی در پاسخ‌های ثبت‌شده برجستگی بیشتری داشته‌اند."
+
+  };
+
+  return descriptions[temp] ||
+    "نتیجه ارزیابی در محدوده متعادل یا ترکیبی قرار گرفته است و برای تفسیر دقیق‌تر باید مجموعه علائم، سابقه و شرایط فردی نیز در نظر گرفته شود.";
+}
+
+
+/* =========================================================
+   HUMOR DOT
+========================================================= */
+
+function getHumorDot(key){
+  return `<span class="dot dot-${key}"></span>`;
+}
+
+
+/* =========================================================
+   CALCULATE
+========================================================= */
 
 function calculate(){
 
-let thermal=0;
-let moist=0;
-let missing=false;
+  let thermal = 0;
+  let moisture = 0;
+
+  qs.forEach((q,index)=>{
+
+    const selected = document.querySelector(
+      `input[name="q${index}"]:checked`
+    );
+
+    if(!selected) return;
+
+    const value = Number(selected.value);
+
+    thermal += q.thermal[value] * q.weight;
+    moisture += q.moisture[value] * q.weight;
+
+  });
 
 
-qs.forEach((q,i)=>{
+  /* -------------------------
+     Temperament
+  ------------------------- */
 
-let v=val("q"+i);
+  const temp = getTemperament(thermal,moisture);
 
-if(v===null){
+  let clarity = "متوسط";
 
-missing=true;
+  if(
+    Math.abs(thermal) >= 24 &&
+    Math.abs(moisture) >= 24
+  ){
+    clarity = "بسیار واضح";
+  }
+  else if(
+    Math.abs(thermal) >= 18 &&
+    Math.abs(moisture) >= 18
+  ){
+    clarity = "واضح";
+  }
 
-return;
+
+  /* -------------------------
+     Humors
+  ------------------------- */
+
+  const humorScores = {
+
+    damavi:
+      document.querySelectorAll(
+        'input[name="damavi"]:checked'
+      ).length,
+
+    safrav:
+      document.querySelectorAll(
+        'input[name="safrav"]:checked'
+      ).length,
+
+    balghami:
+      document.querySelectorAll(
+        'input[name="balghami"]:checked'
+      ).length,
+
+    sodavi:
+      document.querySelectorAll(
+        'input[name="sodavi"]:checked'
+      ).length
+
+  };
+
+
+  const sortedHumors = Object.entries(humorScores)
+    .sort((a,b)=>b[1]-a[1]);
+
+  let dominant = sortedHumors[0][0];
+
+  if(
+    sortedHumors.length > 1 &&
+    sortedHumors[0][1] === sortedHumors[1][1]
+  ){
+    dominant = "ترکیبی";
+  }
+
+
+  /* -------------------------
+     Percentage Model
+  ------------------------- */
+
+  const warm = Math.max(0,thermal);
+  const cold = Math.max(0,-thermal);
+
+  const wet = Math.max(0,moisture);
+  const dry = Math.max(0,-moisture);
+
+  const raw = {
+
+    damavi: warm + wet,
+
+    safrav: warm + dry,
+
+    balghami: cold + wet,
+
+    sodavi: cold + dry
+
+  };
+
+
+  const total = Object.values(raw)
+    .reduce((sum,value)=>sum + value,0);
+
+
+  const percentages = total === 0
+    ? {
+        damavi:25,
+        safrav:25,
+        balghami:25,
+        sodavi:25
+      }
+    : {
+        damavi:(raw.damavi / total) * 100,
+        safrav:(raw.safrav / total) * 100,
+        balghami:(raw.balghami / total) * 100,
+        sodavi:(raw.sodavi / total) * 100
+      };
+
+
+  /* -------------------------
+     Patient Data
+  ------------------------- */
+
+  const name =
+    document.getElementById("name").value.trim() || "—";
+
+  const caseNo =
+    document.getElementById("caseNo").value.trim() || "—";
+
+  const age =
+    document.getElementById("age").value.trim() || "—";
+
+  const sex =
+    document.getElementById("sex").value || "—";
+
+  const phone =
+    document.getElementById("phone").value.trim() || "—";
+
+  const date =
+    document.getElementById("date").value || "—";
+
+  const note =
+    document.getElementById("initialNote").value.trim() ||
+    "یادداشت خاصی ثبت نشده است.";
+
+
+  /* -------------------------
+     Report Header
+  ------------------------- */
+
+  document.getElementById("rName").textContent = name;
+  document.getElementById("rCaseNo").textContent = caseNo;
+  document.getElementById("rAge").textContent = age;
+  document.getElementById("rSex").textContent = sex;
+  document.getElementById("rPhone").textContent = phone;
+  document.getElementById("rDate").textContent = formatDate(date);
+
+  document.getElementById("reportInitialNote").textContent = note;
+
+
+  /* -------------------------
+     Result Hero
+  ------------------------- */
+
+  const hero = document.getElementById("resultHero");
+
+  hero.className =
+    "result-hero " + temperamentClass(temp);
+
+  document.getElementById("resultTitle").textContent =
+    temp;
+
+  document.getElementById("resultSubtitle").textContent =
+    `الگوی غالب اخلاطی: ${dominantName(dominant)} | وضوح نتیجه: ${clarity}`;
+
+
+  document.getElementById("thermalResult").textContent =
+    thermal > 0
+      ? `گرم (${thermal})`
+      : thermal < 0
+        ? `سرد (${Math.abs(thermal)})`
+        : "متعادل (0)";
+
+
+  document.getElementById("moistureResult").textContent =
+    moisture > 0
+      ? `تر (${moisture})`
+      : moisture < 0
+        ? `خشک (${Math.abs(moisture)})`
+        : "متعادل (0)";
+
+
+  document.getElementById("clarityResult").textContent =
+    clarity;
+
+
+  document.getElementById("temperamentDescription").textContent =
+    temperamentDescription(temp);
+
+
+  /* -------------------------
+     Humor Scores
+  ------------------------- */
+
+  updateHumorResult(
+    "damavi",
+    humorScores.damavi
+  );
+
+  updateHumorResult(
+    "safrav",
+    humorScores.safrav
+  );
+
+  updateHumorResult(
+    "balghami",
+    humorScores.balghami
+  );
+
+  updateHumorResult(
+    "sodavi",
+    humorScores.sodavi
+  );
+
+
+  /* -------------------------
+     Chart
+  ------------------------- */
+
+  setChart(
+    "Damavi",
+    percentages.damavi
+  );
+
+  setChart(
+    "Safrav",
+    percentages.safrav
+  );
+
+  setChart(
+    "Balgham",
+    percentages.balghami
+  );
+
+  setChart(
+    "Soda",
+    percentages.sodavi
+  );
+
+
+  /* -------------------------
+     Show Report
+  ------------------------- */
+
+  const report = document.getElementById("report");
+
+  report.style.display = "block";
+
+  report.scrollIntoView({
+    behavior:"smooth",
+    block:"start"
+  });
 
 }
 
-thermal += q[2][v] * q[1];
 
-moist += q[3][v] * q[1];
+/* =========================================================
+   CHART
+========================================================= */
 
-});
+function setChart(name,value){
 
+  const rounded =
+    Math.round(value * 10) / 10;
 
-if(missing){
+  const bar =
+    document.getElementById("chart" + name);
 
-alert("لطفاً به همه ۲۰ سؤال مزاج پاسخ دهید.");
+  const valueEl =
+    document.getElementById("chart" + name + "Value");
 
-return;
+  bar.dataset.height = rounded;
+  bar.style.height = "0%";
 
-}
+  valueEl.textContent =
+    rounded + "%";
 
-
-const t=
-thermal>=12
-?"گرم"
-:
-thermal<=-12
-?"سرد"
-:
-"متعادل/مرزی";
-
-
-const m=
-moist>=12
-?"تر"
-:
-moist<=-12
-?"خشک"
-:
-"متعادل/مرزی";
-
-
-let temperament=
-(t==="گرم"&&m==="تر")
-?"دموی"
-:
-(t==="گرم"&&m==="خشک")
-?"صفراوی"
-:
-(t==="سرد"&&m==="تر")
-?"بلغمی"
-:
-(t==="سرد"&&m==="خشک")
-?"سوداوی"
-:
-"متعادل/ترکیبی";
-
-
-const hum=[];
-
-
-for(
-const [h,items]
-of Object.entries(humors)
-){
-
-let total=0;
-
-items.forEach((_,j)=>{
-
-let v=val(h+j);
-
-if(v===null)
-
-missing=true;
-
-else
-
-total+=v;
-
-});
-
-hum.push([h,total]);
+  setTimeout(()=>{
+    bar.style.height =
+      rounded + "%";
+  },100);
 
 }
 
 
-if(missing){
+/* =========================================================
+   HUMOR RESULT
+========================================================= */
 
-alert(
-"لطفاً به همه موارد غربالگری اخلاط پاسخ دهید."
-);
+function updateHumorResult(key,score){
 
-return;
+  const percentage =
+    Math.round((score / 6) * 100);
+
+  document.getElementById(
+    key + "Score"
+  ).textContent =
+    `${score}/6`;
+
+  document.getElementById(
+    key + "Progress"
+  ).style.width =
+    percentage + "%";
 
 }
 
 
-hum.sort((a,b)=>b[1]-a[1]);
+/* =========================================================
+   DOMINANT HUMOR NAME
+========================================================= */
 
+function dominantName(key){
 
-let dominant=
-hum[0][1]===hum[1][1]
-?
-"الگوی مشترک / نیازمند ارزیابی بالینی"
-:
-hum[0][0];
+  const names = {
 
+    damavi:"دموی",
 
-const level=
-(Math.abs(thermal)>=24 &&
-Math.abs(moist)>=24)
-?
-"بسیار واضح"
-:
-(Math.abs(thermal)>=18 &&
-Math.abs(moist)>=18)
-?
-"واضح"
-:
-"متوسط";
+    safrav:"صفراوی",
 
+    balghami:"بلغمی",
 
-document.getElementById("report").innerHTML=`
+    sodavi:"سوداوی",
 
-<p>
+    ترکیبی:"ترکیبی"
 
-<span class="badge">
+  };
 
-مزاج پیشنهادی: ${temperament}
-
-</span>
-
-</p>
-
-
-<div class="scoregrid">
-
-<div class="score">
-
-محور گرمی/سردی
-
-<br>
-
-<b>${thermal.toFixed(1)}</b>
-
-<br>
-
-${t}
-
-</div>
-
-
-<div class="score">
-
-محور تری/خشکی
-
-<br>
-
-<b>${moist.toFixed(1)}</b>
-
-<br>
-
-${m}
-
-</div>
-
-</div>
-
-
-<p>
-
-<b>وضوح الگو:</b>
-
-${level}
-
-</p>
-
-
-<h3>
-غربالگری اخلاط فعلی
-</h3>
-
-
-<table>
-
-<tr>
-
-<th>خلط</th>
-
-<th>امتیاز از ۱۸</th>
-
-</tr>
-
-${hum.map(x=>`
-
-<tr>
-
-<td>${x[0]}</td>
-
-<td>${x[1]}</td>
-
-</tr>
-
-`).join("")}
-
-</table>
-
-
-<p>
-
-<b>الگوی غالب فعلی:</b>
-
-${dominant}
-
-</p>
-
-
-<hr>
-
-
-<p class="note">
-
-این محاسبات یک مدل عملی پیشنهادی برای غربالگری است
-و ضرایب و آستانه‌های آن به‌عنوان آزمون تشخیصی استانداردشده
-اعتبارسنجی نشده‌اند.
-تفسیر نهایی باید با ارزیابی بالینی و منابع معتبر طب ایرانی انجام شود.
-
-</p>
-
-`;
-
-
-document.getElementById("result")
-.classList.add("show");
-
-
-window.scrollTo({
-
-top:
-document.getElementById("result").offsetTop-10,
-
-behavior:"smooth"
-
-});
-
-
-return {
-
-thermal,
-moist,
-temperament,
-hum,
-dominant,
-level
-
-};
-
+  return names[key] || "نامشخص";
 }
 
+
+/* =========================================================
+   DATE
+========================================================= */
+
+function formatDate(date){
+
+  if(!date) return "—";
+
+  const parts =
+    date.split("-");
+
+  if(parts.length !== 3)
+    return date;
+
+  return `${parts[2]}/${parts[1]}/${parts[0]}`;
+}
+
+
+/* =========================================================
+   SAVE CASE
+========================================================= */
 
 function saveCase(){
 
-const r=calculate();
+  calculate();
 
-if(!r)return;
-
-
-const data={
-
-id:Date.now(),
-
-name:name.value,
-
-caseNo:caseNo.value,
-
-age:age.value,
-
-sex:sex.value,
-
-phone:phone.value,
-
-date:date.value,
-
-note:initialNote.value,
-
-result:r
-
-};
+  const cases =
+    JSON.parse(
+      localStorage.getItem("hakimCases") || "[]"
+    );
 
 
-let cases=
-JSON.parse(
-localStorage.getItem("hakimCases")||"[]"
-);
+  const record = {
+
+    id:Date.now(),
+
+    name:
+      document.getElementById("name").value.trim(),
+
+    caseNo:
+      document.getElementById("caseNo").value.trim(),
+
+    age:
+      document.getElementById("age").value.trim(),
+
+    sex:
+      document.getElementById("sex").value,
+
+    phone:
+      document.getElementById("phone").value.trim(),
+
+    date:
+      document.getElementById("date").value,
+
+    note:
+      document.getElementById("initialNote").value.trim(),
+
+    savedAt:
+      new Date().toISOString()
+
+  };
 
 
-cases.unshift(data);
+  cases.unshift(record);
+
+  if(cases.length > 100){
+    cases.length = 100;
+  }
 
 
-localStorage.setItem(
-"hakimCases",
-JSON.stringify(
-cases.slice(0,100)
-)
-);
+  localStorage.setItem(
+    "hakimCases",
+    JSON.stringify(cases)
+  );
 
 
-renderCases();
+  renderCases();
 
-
-alert(
-"پرونده با موفقیت روی این دستگاه ذخیره شد."
-);
-
+  alert("پرونده با موفقیت ذخیره شد.");
 }
 
+
+/* =========================================================
+   RENDER CASES
+========================================================= */
 
 function renderCases(){
 
-const el=
-document.getElementById("caseList");
+  const list =
+    document.getElementById("caseList");
+
+  const cases =
+    JSON.parse(
+      localStorage.getItem("hakimCases") || "[]"
+    );
 
 
-const cases=
-JSON.parse(
-localStorage.getItem("hakimCases")||"[]"
-);
+  if(!cases.length){
+
+    list.innerHTML =
+      `<div style="color:#777;font-size:13px;">
+        هنوز پرونده‌ای ذخیره نشده است.
+      </div>`;
+
+    return;
+  }
 
 
-if(!cases.length){
+  list.innerHTML =
+    cases.map(item=>`
 
-el.textContent=
-"هنوز پرونده‌ای ذخیره نشده است.";
+      <div class="case-item">
 
-return;
+        <div class="case-info">
+
+          <strong>
+            ${escapeHtml(item.name || "بدون نام")}
+          </strong>
+
+          <br>
+
+          پرونده:
+          ${escapeHtml(item.caseNo || "—")}
+
+          |
+          سن:
+          ${escapeHtml(item.age || "—")}
+
+          |
+          تاریخ:
+          ${formatDate(item.date)}
+
+        </div>
+
+        <div class="case-actions">
+
+          <button
+            class="btn btn-light"
+            onclick="loadCase(${item.id})"
+          >
+            مشاهده
+          </button>
+
+          <button
+            class="btn btn-danger"
+            onclick="delCase(${item.id})"
+          >
+            حذف
+          </button>
+
+        </div>
+
+      </div>
+
+    `).join("");
 
 }
 
 
-el.innerHTML=
+/* =========================================================
+   LOAD CASE
+========================================================= */
 
-cases.map(c=>`
+function loadCase(id){
 
-<div class="case">
+  const cases =
+    JSON.parse(
+      localStorage.getItem("hakimCases") || "[]"
+    );
 
-<div>
+  const item =
+    cases.find(x=>x.id === id);
 
-<b>
-${c.name||"بدون نام"}
-</b>
-
-<br>
-
-<span class="note">
-
-${c.caseNo||"-"}
-|
-${c.date||"-"}
-|
-${c.result.temperament}
-
-</span>
-
-</div>
+  if(!item) return;
 
 
-<button
-class="btn danger"
-onclick="delCase(${c.id})">
+  document.getElementById("name").value =
+    item.name || "";
 
-حذف
+  document.getElementById("caseNo").value =
+    item.caseNo || "";
 
-</button>
+  document.getElementById("age").value =
+    item.age || "";
 
-</div>
+  document.getElementById("sex").value =
+    item.sex || "";
 
-`).join("");
+  document.getElementById("phone").value =
+    item.phone || "";
+
+  document.getElementById("date").value =
+    item.date || "";
+
+  document.getElementById("initialNote").value =
+    item.note || "";
+
+
+  calculate();
+
+  window.scrollTo({
+    top:0,
+    behavior:"smooth"
+  });
 
 }
 
+
+/* =========================================================
+   DELETE CASE
+========================================================= */
 
 function delCase(id){
 
-let c=
-JSON.parse(
-localStorage.getItem("hakimCases")||"[]"
-)
-.filter(x=>x.id!==id);
+  if(!confirm("آیا از حذف این پرونده مطمئن هستید؟")){
+    return;
+  }
+
+  let cases =
+    JSON.parse(
+      localStorage.getItem("hakimCases") || "[]"
+    );
+
+  cases =
+    cases.filter(x=>x.id !== id);
+
+  localStorage.setItem(
+    "hakimCases",
+    JSON.stringify(cases)
+  );
+
+  renderCases();
+}
 
 
-localStorage.setItem(
-"hakimCases",
-JSON.stringify(c)
-);
+/* =========================================================
+   RESET
+========================================================= */
+
+function resetForm(){
+
+  if(
+    !confirm(
+      "اطلاعات فرم پاک شود و ارزیابی جدید آغاز شود؟"
+    )
+  ){
+    return;
+  }
 
 
-renderCases();
+  document.getElementById("name").value = "";
+  document.getElementById("caseNo").value = "";
+  document.getElementById("age").value = "";
+  document.getElementById("sex").value = "";
+  document.getElementById("phone").value = "";
+  document.getElementById("date").value = "";
+  document.getElementById("initialNote").value = "";
+
+
+  document.querySelectorAll(
+    'input[type="radio"], input[type="checkbox"]'
+  ).forEach(input=>{
+    input.checked = false;
+  });
+
+
+  document.getElementById("report").style.display =
+    "none";
+
+
+  window.scrollTo({
+    top:0,
+    behavior:"smooth"
+  });
 
 }
 
 
+/* =========================================================
+   PRINT
+========================================================= */
+
+function printReport(){
+
+  const report =
+    document.getElementById("report");
+
+  if(
+    !report ||
+    report.style.display === "none"
+  ){
+    alert("ابتدا نتیجه ارزیابی را محاسبه کنید.");
+    return;
+  }
+
+  window.print();
+
+}
+
+
+/* =========================================================
+   ESCAPE HTML
+========================================================= */
+
+function escapeHtml(value){
+
+  return String(value)
+    .replaceAll("&","&amp;")
+    .replaceAll("<","&lt;")
+    .replaceAll(">","&gt;")
+    .replaceAll('"',"&quot;")
+    .replaceAll("'","&#039;");
+
+}
+
+
+/* =========================================================
+   INITIALIZE
+========================================================= */
+
+renderQuestions();
+renderHumors();
 renderCases();
 
 
-if("serviceWorker" in navigator)
+/* Default date */
 
-navigator.serviceWorker.register("sw.js");
+(function(){
+
+  const date =
+    document.getElementById("date");
+
+  if(date && !date.value){
+
+    const now =
+      new Date();
+
+    const year =
+      now.getFullYear();
+
+    const month =
+      String(now.getMonth()+1)
+        .padStart(2,"0");
+
+    const day =
+      String(now.getDate())
+        .padStart(2,"0");
+
+    date.value =
+      `${year}-${month}-${day}`;
+  }
+
+})();
+
+
+/* =========================================================
+   PWA
+========================================================= */
+
+if("serviceWorker" in navigator){
+
+  window.addEventListener(
+    "load",
+    ()=>{
+      navigator.serviceWorker
+        .register("sw.js")
+        .catch(err=>{
+          console.log(
+            "Service Worker Error:",
+            err
+          );
+        });
+    }
+  );
+
+}
 
 </script>
 
