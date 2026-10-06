@@ -1,1490 +1,3 @@
-<!DOCTYPE html>
-<html lang="fa" dir="rtl">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="theme-color" content="#17451f">
-
-<title>ارزیابی مزاج | سلامتکده و عطاری حکیم آذربایجان</title>
-
-<link rel="manifest" href="manifest.json">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-
-<style>
-:root{
-  --green:#17451f;
-  --green2:#286b32;
-  --green3:#eaf4eb;
-
-  --gold:#b78620;
-  --gold2:#d7ad4d;
-  --gold-light:#fff8e8;
-
-  --red:#c62828;
-  --red-light:#fdeaea;
-
-  --earth:#8a6a45;
-  --earth-light:#f1e9de;
-
-  --fire:#e69a00;
-  --fire-light:#fff4d6;
-
-  --blue:#1976b9;
-  --blue-light:#e7f3fb;
-
-  --text:#263126;
-  --muted:#6c746d;
-  --border:#dfe6df;
-  --bg:#f4f7f4;
-  --white:#fff;
-
-  --shadow:0 8px 30px rgba(23,69,31,.08);
-}
-
-*{
-  box-sizing:border-box;
-}
-
-html{
-  scroll-behavior:smooth;
-}
-
-body{
-  margin:0;
-  font-family:"Vazirmatn",Tahoma,sans-serif;
-  background:var(--bg);
-  color:var(--text);
-  line-height:1.9;
-}
-
-button,
-input,
-select,
-textarea{
-  font-family:inherit;
-}
-
-button{
-  cursor:pointer;
-}
-
-.container{
-  width:min(1180px,calc(100% - 30px));
-  margin:auto;
-}
-
-/* =========================
-   HEADER
-========================= */
-
-.header{
-  background:linear-gradient(135deg,var(--green),#102f16);
-  color:#fff;
-  padding:22px 0;
-  box-shadow:0 5px 25px rgba(0,0,0,.12);
-}
-
-.header-inner{
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  gap:20px;
-}
-
-.brand{
-  display:flex;
-  align-items:center;
-  gap:15px;
-}
-
-.brand-logo{
-  width:72px;
-  height:72px;
-  object-fit:contain;
-  background:#fff;
-  border-radius:18px;
-  padding:5px;
-}
-
-.brand h1{
-  margin:0;
-  font-size:24px;
-  font-weight:800;
-}
-
-.brand p{
-  margin:4px 0 0;
-  color:#dcebdc;
-  font-size:13px;
-}
-
-.header-badge{
-  background:rgba(255,255,255,.1);
-  border:1px solid rgba(255,255,255,.2);
-  border-radius:12px;
-  padding:9px 15px;
-  font-size:13px;
-}
-
-/* =========================
-   MAIN
-========================= */
-
-main{
-  padding:28px 0 60px;
-}
-
-.card{
-  position:relative;
-  background:#fff;
-  border:1px solid var(--border);
-  border-radius:20px;
-  padding:25px;
-  margin-bottom:22px;
-  box-shadow:var(--shadow);
-  overflow:hidden;
-}
-
-.section-title{
-  display:flex;
-  align-items:center;
-  gap:10px;
-  color:var(--green);
-  margin:0 0 20px;
-  font-size:19px;
-  font-weight:800;
-}
-
-.section-title::after{
-  content:"";
-  height:2px;
-  flex:1;
-  background:linear-gradient(to left,transparent,var(--gold));
-  margin-right:10px;
-}
-
-/* =========================
-   FORM
-========================= */
-
-.grid{
-  display:grid;
-  grid-template-columns:repeat(3,1fr);
-  gap:15px;
-}
-
-.field{
-  display:flex;
-  flex-direction:column;
-  gap:6px;
-}
-
-.field.full{
-  grid-column:1/-1;
-}
-
-label{
-  font-size:13px;
-  font-weight:600;
-  color:#4f5951;
-}
-
-input,
-select,
-textarea{
-  width:100%;
-  border:1px solid #d7dfd7;
-  border-radius:11px;
-  padding:11px 13px;
-  background:#fff;
-  color:var(--text);
-  outline:none;
-  transition:.2s;
-}
-
-input:focus,
-select:focus,
-textarea:focus{
-  border-color:var(--green2);
-  box-shadow:0 0 0 3px rgba(40,107,50,.08);
-}
-
-textarea{
-  resize:vertical;
-  min-height:90px;
-}
-
-/* =========================
-   QUESTIONS
-========================= */
-
-.question{
-  border:1px solid var(--border);
-  border-radius:15px;
-  padding:17px;
-  margin-bottom:13px;
-  background:#fcfdfc;
-}
-
-.question-title{
-  font-weight:700;
-  margin-bottom:12px;
-  color:var(--green);
-}
-
-.options{
-  display:grid;
-  grid-template-columns:repeat(5,1fr);
-  gap:8px;
-}
-
-.option{
-  position:relative;
-}
-
-.option input{
-  position:absolute;
-  opacity:0;
-  pointer-events:none;
-}
-
-.option label{
-  display:block;
-  text-align:center;
-  border:1px solid #dce3dc;
-  border-radius:10px;
-  padding:8px 5px;
-  font-size:12px;
-  cursor:pointer;
-  background:#fff;
-  transition:.2s;
-}
-
-.option input:checked + label{
-  background:var(--green);
-  border-color:var(--green);
-  color:#fff;
-  box-shadow:0 4px 10px rgba(23,69,31,.18);
-}
-
-/* =========================
-   HUMORS
-========================= */
-
-.humor-grid{
-  display:grid;
-  grid-template-columns:repeat(2,1fr);
-  gap:15px;
-}
-
-.humor-card{
-  border:1px solid var(--border);
-  border-radius:15px;
-  padding:16px;
-  background:#fff;
-}
-
-.humor-card h3{
-  margin:0 0 12px;
-  font-size:16px;
-}
-
-.humor-options{
-  display:grid;
-  grid-template-columns:repeat(2,1fr);
-  gap:7px;
-}
-
-.humor-option{
-  position:relative;
-}
-
-.humor-option input{
-  position:absolute;
-  opacity:0;
-}
-
-.humor-option label{
-  display:block;
-  padding:7px;
-  text-align:center;
-  border:1px solid #e1e6e1;
-  border-radius:9px;
-  cursor:pointer;
-  font-size:12px;
-}
-
-.humor-option input:checked + label{
-  background:var(--green);
-  color:#fff;
-  border-color:var(--green);
-}
-
-/* =========================
-   BUTTONS
-========================= */
-
-.actions{
-  display:flex;
-  flex-wrap:wrap;
-  gap:10px;
-  margin-top:20px;
-}
-
-.btn{
-  border:0;
-  border-radius:11px;
-  padding:11px 18px;
-  font-weight:700;
-  transition:.2s;
-}
-
-.btn:hover{
-  transform:translateY(-1px);
-}
-
-.btn-primary{
-  background:var(--green);
-  color:#fff;
-}
-
-.btn-primary:hover{
-  background:var(--green2);
-}
-
-.btn-gold{
-  background:var(--gold);
-  color:#fff;
-}
-
-.btn-light{
-  background:#eef3ee;
-  color:var(--green);
-}
-
-.btn-danger{
-  background:#fbeaea;
-  color:#b51e1e;
-}
-
-/* =========================
-   REPORT
-========================= */
-
-.report{
-  position:relative;
-  overflow:hidden;
-}
-
-.report .watermark{
-  position:absolute;
-  inset:0;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  pointer-events:none;
-  z-index:0;
-}
-
-.watermark img{
-  width:min(480px,65%);
-  opacity:.045;
-  filter:grayscale(1);
-}
-
-.report > *:not(.watermark){
-  position:relative;
-  z-index:1;
-}
-
-/* Report Header */
-
-.report-header{
-  display:grid;
-  grid-template-columns:100px 1fr 180px;
-  align-items:center;
-  gap:18px;
-  border-bottom:3px double var(--gold);
-  padding-bottom:18px;
-  margin-bottom:18px;
-}
-
-.report-logo{
-  width:90px;
-  height:90px;
-  object-fit:contain;
-}
-
-.report-title{
-  text-align:center;
-}
-
-.report-title h2{
-  color:var(--green);
-  margin:0;
-  font-size:23px;
-  font-weight:800;
-}
-
-.report-title p{
-  margin:4px 0 0;
-  color:var(--muted);
-  font-size:12px;
-}
-
-.report-meta{
-  text-align:left;
-  font-size:11px;
-  color:var(--muted);
-  direction:rtl;
-}
-
-.report-meta strong{
-  color:var(--green);
-}
-
-/* Patient */
-
-.patient-box{
-  border:1px solid #dce4dc;
-  border-radius:13px;
-  padding:13px 15px;
-  background:rgba(250,252,250,.9);
-  margin-bottom:18px;
-}
-
-.patient-grid{
-  display:grid;
-  grid-template-columns:repeat(4,1fr);
-  gap:9px;
-}
-
-.patient-item{
-  border-left:1px solid #e1e6e1;
-  padding-left:8px;
-  font-size:12px;
-}
-
-.patient-item:last-child{
-  border-left:0;
-}
-
-.patient-item span{
-  display:block;
-  color:var(--muted);
-  font-size:10px;
-}
-
-.patient-item strong{
-  color:var(--green);
-}
-
-/* Result */
-
-.result-hero{
-  border-radius:17px;
-  padding:20px;
-  text-align:center;
-  border:1px solid var(--border);
-  margin-bottom:18px;
-}
-
-.result-hero h2{
-  margin:3px 0;
-  font-size:27px;
-}
-
-.result-hero p{
-  margin:5px 0 0;
-  font-size:13px;
-}
-
-.result-hero.temperament-damavi{
-  background:var(--red-light);
-  color:var(--red);
-  border-color:#efbaba;
-}
-
-.result-hero.temperament-safrav{
-  background:var(--fire-light);
-  color:#b26b00;
-  border-color:#efd48c;
-}
-
-.result-hero.temperament-balghami{
-  background:var(--blue-light);
-  color:var(--blue);
-  border-color:#b8d9eb;
-}
-
-.result-hero.temperament-sodavi{
-  background:var(--earth-light);
-  color:var(--earth);
-  border-color:#d9c5aa;
-}
-
-.result-hero.temperament-neutral{
-  background:#f0f3f0;
-  color:var(--green);
-}
-
-/* Result stats */
-
-.result-stats{
-  display:grid;
-  grid-template-columns:repeat(3,1fr);
-  gap:12px;
-  margin-bottom:18px;
-}
-
-.stat{
-  border:1px solid var(--border);
-  border-radius:13px;
-  padding:13px;
-  text-align:center;
-  background:rgba(255,255,255,.9);
-}
-
-.stat span{
-  display:block;
-  color:var(--muted);
-  font-size:11px;
-}
-
-.stat strong{
-  display:block;
-  color:var(--green);
-  font-size:17px;
-  margin-top:3px;
-}
-
-/* Description */
-
-.description-box{
-  border-right:4px solid var(--gold);
-  background:var(--gold-light);
-  border-radius:10px;
-  padding:13px 16px;
-  font-size:13px;
-  margin-bottom:18px;
-}
-
-/* =========================
-   CHART
-========================= */
-
-.chart-box{
-  border:1px solid var(--border);
-  border-radius:15px;
-  padding:18px;
-  background:rgba(255,255,255,.92);
-  margin-bottom:18px;
-}
-
-.chart-title{
-  margin:0 0 17px;
-  color:var(--green);
-  font-size:15px;
-  font-weight:800;
-}
-
-.chart{
-  display:grid;
-  grid-template-columns:repeat(4,1fr);
-  gap:18px;
-  align-items:end;
-  height:210px;
-  padding:10px 15px 0;
-  border-bottom:1px solid #dfe5df;
-}
-
-.chart-column{
-  height:100%;
-  display:flex;
-  flex-direction:column;
-  justify-content:flex-end;
-  align-items:center;
-  gap:7px;
-}
-
-.chart-value{
-  font-size:12px;
-  font-weight:800;
-}
-
-.chart-bar-wrap{
-  width:58px;
-  height:150px;
-  display:flex;
-  align-items:flex-end;
-  justify-content:center;
-}
-
-.chart-bar{
-  width:100%;
-  min-height:4px;
-  height:0;
-  border-radius:9px 9px 2px 2px;
-  transition:height 1s ease;
-}
-
-.chart-label{
-  font-size:11px;
-  font-weight:700;
-}
-
-.chart-damavi{
-  background:var(--red);
-}
-
-.chart-safrav{
-  background:var(--fire);
-}
-
-.chart-balghami{
-  background:var(--blue);
-}
-
-.chart-sodavi{
-  background:var(--earth);
-}
-
-.chart-note{
-  margin:12px 0 0;
-  font-size:10px;
-  color:var(--muted);
-  text-align:center;
-}
-
-/* =========================
-   HUMOR RESULT
-========================= */
-
-.humor-results{
-  display:grid;
-  grid-template-columns:repeat(4,1fr);
-  gap:10px;
-  margin-bottom:18px;
-}
-
-.humor-result{
-  border:1px solid var(--border);
-  border-radius:12px;
-  padding:11px;
-  background:#fff;
-}
-
-.humor-result-top{
-  display:flex;
-  align-items:center;
-  gap:7px;
-  font-size:12px;
-  font-weight:700;
-}
-
-.dot{
-  width:10px;
-  height:10px;
-  border-radius:50%;
-  display:inline-block;
-}
-
-.dot-damavi{background:var(--red)}
-.dot-safrav{background:var(--fire)}
-.dot-balghami{background:var(--blue)}
-.dot-sodavi{background:var(--earth)}
-
-.progress{
-  height:7px;
-  border-radius:20px;
-  background:#edf0ed;
-  overflow:hidden;
-  margin-top:7px;
-}
-
-.progress span{
-  display:block;
-  height:100%;
-  border-radius:20px;
-}
-
-/* =========================
-   CLINICAL NOTE
-========================= */
-
-.clinical-note{
-  border:1px dashed #c8d1c8;
-  border-radius:12px;
-  min-height:110px;
-  padding:13px;
-  margin-top:16px;
-}
-
-.clinical-note-title{
-  color:var(--green);
-  font-weight:800;
-  font-size:13px;
-  margin-bottom:7px;
-}
-
-/* Signature */
-
-.signature-area{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:50px;
-  margin-top:35px;
-  padding-top:18px;
-}
-
-.signature-box{
-  text-align:center;
-  font-size:12px;
-  color:var(--muted);
-}
-
-.signature-line{
-  border-top:1px solid #9ba59b;
-  margin-top:42px;
-  padding-top:7px;
-}
-
-/* =========================
-   SAVED CASES
-========================= */
-
-.case-list{
-  display:flex;
-  flex-direction:column;
-  gap:8px;
-}
-
-.case-item{
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  gap:12px;
-  padding:12px 14px;
-  background:#fafcf9;
-  border:1px solid var(--border);
-  border-radius:11px;
-}
-
-.case-info{
-  font-size:12px;
-}
-
-.case-info strong{
-  color:var(--green);
-}
-
-.case-actions{
-  display:flex;
-  gap:5px;
-}
-
-/* =========================
-   FOOTER
-========================= */
-
-.footer{
-  text-align:center;
-  color:var(--muted);
-  font-size:11px;
-  padding:15px 0 30px;
-}
-
-/* =========================
-   PRINT
-========================= */
-
-.print-only{
-  display:none;
-}
-
-@media print{
-
-  @page{
-    size:A4;
-    margin:12mm;
-  }
-
-  html,
-  body{
-    background:#fff !important;
-    margin:0 !important;
-    padding:0 !important;
-  }
-
-  body{
-    font-size:11px;
-  }
-
-  .no-print,
-  header,
-  .header,
-  .actions,
-  .footer,
-  .form-section,
-  .questions-section,
-  .humors-section,
-  .cases-section{
-    display:none !important;
-  }
-
-  main{
-    padding:0 !important;
-  }
-
-  .container{
-    width:100% !important;
-    max-width:none !important;
-    margin:0 !important;
-  }
-
-  .card.report{
-    display:block !important;
-    border:0 !important;
-    box-shadow:none !important;
-    border-radius:0 !important;
-    padding:0 !important;
-    margin:0 !important;
-    overflow:visible !important;
-  }
-
-  .report-header{
-    grid-template-columns:75px 1fr 150px;
-    padding-bottom:10px;
-    margin-bottom:12px;
-  }
-
-  .report-logo{
-    width:65px;
-    height:65px;
-  }
-
-  .report-title h2{
-    font-size:19px;
-  }
-
-  .report-title p{
-    font-size:9px;
-  }
-
-  .report-meta{
-    font-size:8px;
-  }
-
-  .patient-box{
-    padding:8px 10px;
-    margin-bottom:10px;
-  }
-
-  .patient-item{
-    font-size:9px;
-  }
-
-  .patient-item span{
-    font-size:8px;
-  }
-
-  .result-hero{
-    padding:12px;
-    margin-bottom:10px;
-  }
-
-  .result-hero h2{
-    font-size:20px;
-  }
-
-  .result-hero p{
-    font-size:9px;
-  }
-
-  .result-stats{
-    margin-bottom:10px;
-    gap:7px;
-  }
-
-  .stat{
-    padding:7px;
-  }
-
-  .stat span{
-    font-size:8px;
-  }
-
-  .stat strong{
-    font-size:12px;
-  }
-
-  .description-box{
-    padding:8px 10px;
-    font-size:9px;
-    margin-bottom:10px;
-  }
-
-  .chart-box{
-    padding:10px;
-    margin-bottom:10px;
-  }
-
-  .chart-title{
-    font-size:11px;
-    margin-bottom:8px;
-  }
-
-  .chart{
-    height:155px;
-  }
-
-  .chart-bar-wrap{
-    height:105px;
-  }
-
-  .chart-bar{
-    print-color-adjust:exact;
-    -webkit-print-color-adjust:exact;
-  }
-
-  .chart-value,
-  .chart-label{
-    font-size:8px;
-  }
-
-  .chart-note{
-    font-size:7px;
-    margin-top:5px;
-  }
-
-  .humor-results{
-    gap:6px;
-    margin-bottom:10px;
-  }
-
-  .humor-result{
-    padding:7px;
-  }
-
-  .humor-result-top{
-    font-size:8px;
-  }
-
-  .progress{
-    height:4px;
-  }
-
-  .clinical-note{
-    min-height:75px;
-    padding:8px;
-    font-size:9px;
-  }
-
-  .clinical-note-title{
-    font-size:9px;
-  }
-
-  .signature-area{
-    margin-top:20px;
-    padding-top:10px;
-  }
-
-  .signature-box{
-    font-size:9px;
-  }
-
-  .signature-line{
-    margin-top:28px;
-  }
-
-  .watermark img{
-    opacity:.035;
-  }
-}
-
-/* =========================
-   RESPONSIVE
-========================= */
-
-@media(max-width:850px){
-
-  .grid{
-    grid-template-columns:repeat(2,1fr);
-  }
-
-  .patient-grid{
-    grid-template-columns:repeat(2,1fr);
-  }
-
-  .patient-item{
-    border-left:0;
-  }
-
-  .options{
-    grid-template-columns:repeat(2,1fr);
-  }
-
-  .humor-grid{
-    grid-template-columns:1fr;
-  }
-
-  .humor-results{
-    grid-template-columns:repeat(2,1fr);
-  }
-
-  .report-header{
-    grid-template-columns:70px 1fr;
-  }
-
-  .report-meta{
-    grid-column:1/-1;
-    text-align:center;
-  }
-}
-
-@media(max-width:600px){
-
-  .container{
-    width:min(100% - 18px,1180px);
-  }
-
-  .header-inner{
-    flex-direction:column;
-    text-align:center;
-  }
-
-  .brand{
-    flex-direction:column;
-  }
-
-  .grid{
-    grid-template-columns:1fr;
-  }
-
-  .field.full{
-    grid-column:auto;
-  }
-
-  .patient-grid{
-    grid-template-columns:1fr 1fr;
-  }
-
-  .result-stats{
-    grid-template-columns:1fr;
-  }
-
-  .humor-results{
-    grid-template-columns:1fr 1fr;
-  }
-
-  .signature-area{
-    grid-template-columns:1fr;
-    gap:20px;
-  }
-}
-</style>
-</head>
-
-<body>
-
-<!-- =========================
-     HEADER
-========================= -->
-
-<header class="header">
-  <div class="container header-inner">
-
-    <div class="brand">
-      <img src="logo.png" class="brand-logo" alt="لوگوی سلامتکده">
-      <div>
-        <h1>سلامتکده و عطاری حکیم آذربایجان</h1>
-        <p>سامانه ارزیابی مزاج و اخلاط چهارگانه</p>
-      </div>
-    </div>
-
-    <div class="header-badge">
-      گزارش ارزیابی مزاج
-    </div>
-
-  </div>
-</header>
-
-<main>
-<div class="container">
-
-<!-- =========================
-     INTAKE
-========================= -->
-
-<section class="card form-section">
-
-  <h2 class="section-title">👤 اطلاعات مراجعه‌کننده</h2>
-
-  <div class="grid">
-
-    <div class="field">
-      <label for="name">نام و نام خانوادگی</label>
-      <input id="name" type="text" placeholder="نام مراجعه‌کننده">
-    </div>
-
-    <div class="field">
-      <label for="caseNo">شماره پرونده</label>
-      <input id="caseNo" type="text" placeholder="شماره پرونده">
-    </div>
-
-    <div class="field">
-      <label for="age">سن</label>
-      <input id="age" type="number" min="1" max="120" placeholder="سن">
-    </div>
-
-    <div class="field">
-      <label for="sex">جنسیت</label>
-      <select id="sex">
-        <option value="">انتخاب کنید</option>
-        <option value="مرد">مرد</option>
-        <option value="زن">زن</option>
-      </select>
-    </div>
-
-    <div class="field">
-      <label for="phone">شماره تماس</label>
-      <input id="phone" type="tel" placeholder="شماره تماس">
-    </div>
-
-    <div class="field">
-      <label for="date">تاریخ ارزیابی</label>
-      <input id="date" type="date">
-    </div>
-
-    <div class="field full">
-      <label for="initialNote">یادداشت اولیه</label>
-      <textarea id="initialNote" placeholder="توضیحات اولیه، شکایت اصلی یا نکات مهم مراجعه‌کننده..."></textarea>
-    </div>
-
-  </div>
-
-</section>
-
-<!-- =========================
-     QUESTIONS
-========================= -->
-
-<section class="card questions-section">
-
-  <h2 class="section-title">🌿 پرسش‌های ارزیابی مزاج</h2>
-
-  <div id="questions"></div>
-
-</section>
-
-<!-- =========================
-     HUMORS
-========================= -->
-
-<section class="card humors-section">
-
-  <h2 class="section-title">🧪 ارزیابی اخلاط چهارگانه</h2>
-
-  <div class="humor-grid" id="humors"></div>
-
-</section>
-
-<!-- =========================
-     ACTIONS
-========================= -->
-
-<section class="card actions no-print">
-
-  <button class="btn btn-primary" onclick="calculate()">
-    🔎 محاسبه و نمایش نتیجه
-  </button>
-
-  <button class="btn btn-gold" onclick="saveCase()">
-    💾 ذخیره پرونده
-  </button>
-
-  <button class="btn btn-light" onclick="printReport()">
-    🖨️ چاپ / ذخیره PDF
-  </button>
-
-  <button class="btn btn-light" onclick="resetForm()">
-    🔄 شروع ارزیابی جدید
-  </button>
-
-</section>
-
-<!-- =========================
-     REPORT
-========================= -->
-
-<section id="report" class="card report" style="display:none;">
-
-  <div class="watermark">
-    <img src="logo.png" alt="">
-  </div>
-
-  <!-- Report Header -->
-
-  <div class="report-header">
-
-    <img src="logo.png" class="report-logo" alt="لوگوی حکیم آذربایجان">
-
-    <div class="report-title">
-      <h2>سلامتکده و عطاری حکیم آذربایجان</h2>
-      <p>گزارش حرفه‌ای ارزیابی مزاج و اخلاط چهارگانه</p>
-    </div>
-
-    <div class="report-meta">
-      <div>تاریخ: <strong id="rDate">—</strong></div>
-      <div>شماره پرونده: <strong id="rCaseNo">—</strong></div>
-      <div>نوع گزارش: ارزیابی مزاج</div>
-    </div>
-
-  </div>
-
-  <!-- Patient -->
-
-  <div class="patient-box">
-
-    <div class="patient-grid">
-
-      <div class="patient-item">
-        <span>نام و نام خانوادگی</span>
-        <strong id="rName">—</strong>
-      </div>
-
-      <div class="patient-item">
-        <span>سن</span>
-        <strong id="rAge">—</strong>
-      </div>
-
-      <div class="patient-item">
-        <span>جنسیت</span>
-        <strong id="rSex">—</strong>
-      </div>
-
-      <div class="patient-item">
-        <span>شماره تماس</span>
-        <strong id="rPhone">—</strong>
-      </div>
-
-    </div>
-
-  </div>
-
-  <!-- Result -->
-
-  <div id="resultHero" class="result-hero">
-
-    <div>نتیجه ارزیابی</div>
-
-    <h2 id="resultTitle">—</h2>
-
-    <p id="resultSubtitle">برای مشاهده نتیجه، ارزیابی را محاسبه کنید.</p>
-
-  </div>
-
-  <!-- Stats -->
-
-  <div class="result-stats">
-
-    <div class="stat">
-      <span>محور حرارتی</span>
-      <strong id="thermalResult">—</strong>
-    </div>
-
-    <div class="stat">
-      <span>محور رطوبتی</span>
-      <strong id="moistureResult">—</strong>
-    </div>
-
-    <div class="stat">
-      <span>وضوح نتیجه</span>
-      <strong id="clarityResult">—</strong>
-    </div>
-
-  </div>
-
-  <!-- Description -->
-
-  <div class="description-box" id="temperamentDescription">
-    —
-  </div>
-
-  <!-- Chart -->
-
-  <div class="chart-box">
-
-    <h3 class="chart-title">
-      📊 نمودار درصدی الگوهای مزاجی
-    </h3>
-
-    <div class="chart">
-
-      <div class="chart-column">
-
-        <div class="chart-value" id="chartDamaviValue">0%</div>
-
-        <div class="chart-bar-wrap">
-          <div id="chartDamavi" class="chart-bar chart-damavi" data-height="0"></div>
-        </div>
-
-        <div class="chart-label">🔴 دموی</div>
-
-      </div>
-
-      <div class="chart-column">
-
-        <div class="chart-value" id="chartSafravValue">0%</div>
-
-        <div class="chart-bar-wrap">
-          <div id="chartSafrav" class="chart-bar chart-safrav" data-height="0"></div>
-        </div>
-
-        <div class="chart-label">🟡 صفراوی</div>
-
-      </div>
-
-      <div class="chart-column">
-
-        <div class="chart-value" id="chartBalghamValue">0%</div>
-
-        <div class="chart-bar-wrap">
-          <div id="chartBalgham" class="chart-bar chart-balghami" data-height="0"></div>
-        </div>
-
-        <div class="chart-label">🔵 بلغمی</div>
-
-      </div>
-
-      <div class="chart-column">
-
-        <div class="chart-value" id="chartSodaValue">0%</div>
-
-        <div class="chart-bar-wrap">
-          <div id="chartSoda" class="chart-bar chart-sodavi" data-height="0"></div>
-        </div>
-
-        <div class="chart-label">🟤 سوداوی</div>
-
-      </div>
-
-    </div>
-
-    <p class="chart-note">
-      درصدهای نمودار، شاخص‌های نسبی حاصل از پاسخ‌های این فرم هستند و به‌تنهایی
-      به معنای احتمال تشخیصی یا تشخیص پزشکی نیستند.
-    </p>
-
-  </div>
-
-  <!-- Humors -->
-
-  <div class="humor-results">
-
-    <div class="humor-result">
-      <div class="humor-result-top">
-        <span class="dot dot-damavi"></span>
-        دموی
-        <strong id="damaviScore" style="margin-right:auto;">0/18</strong>
-      </div>
-      <div class="progress">
-        <span id="damaviProgress" class="chart-damavi" style="width:0%"></span>
-      </div>
-    </div>
-
-    <div class="humor-result">
-      <div class="humor-result-top">
-        <span class="dot dot-safrav"></span>
-        صفراوی
-        <strong id="safravScore" style="margin-right:auto;">0/18</strong>
-      </div>
-      <div class="progress">
-        <span id="safravProgress" class="chart-safrav" style="width:0%"></span>
-      </div>
-    </div>
-
-    <div class="humor-result">
-      <div class="humor-result-top">
-        <span class="dot dot-balghami"></span>
-        بلغمی
-        <strong id="balghamScore" style="margin-right:auto;">0/18</strong>
-      </div>
-      <div class="progress">
-        <span id="balghamProgress" class="chart-balghami" style="width:0%"></span>
-      </div>
-    </div>
-
-    <div class="humor-result">
-      <div class="humor-result-top">
-        <span class="dot dot-sodavi"></span>
-        سوداوی
-        <strong id="sodaScore" style="margin-right:auto;">0/18</strong>
-      </div>
-      <div class="progress">
-        <span id="sodaProgress" class="chart-sodavi" style="width:0%"></span>
-      </div>
-    </div>
-
-  </div>
-
-  <!-- Clinical Note -->
-
-  <div class="clinical-note">
-
-    <div class="clinical-note-title">
-      📝 یادداشت و توضیحات درمانگر
-    </div>
-
-    <div id="reportInitialNote">
-      —
-    </div>
-
-  </div>
-
-  <!-- Signature -->
-
-  <div class="signature-area">
-
-    <div class="signature-box">
-      <div class="signature-line">
-        نام و امضای درمانگر / کارشناس
-      </div>
-    </div>
-
-    <div class="signature-box">
-      <div class="signature-line">
-        مهر سلامتکده و عطاری حکیم آذربایجان
-      </div>
-    </div>
-
-  </div>
-
-</section>
-
-<!-- =========================
-     SAVED CASES
-========================= -->
-
-<section class="card cases-section">
-
-  <h2 class="section-title">📁 پرونده‌های ذخیره‌شده</h2>
-
-  <div id="caseList" class="case-list"></div>
-
-</section>
-
-</div>
-</main>
-
-<footer class="footer">
-  سلامتکده و عطاری حکیم آذربایجان
-  <br>
-  سامانه ارزیابی مزاج
-</footer>
-
 <script>
 
 /* =========================================================
@@ -1492,147 +5,126 @@ textarea{
 ========================================================= */
 
 const qs = [
-
   {
     text:"بدن شما معمولاً چه احساسی دارد؟",
     weight:1,
     thermal:[-2,-1,0,1,2],
     moisture:[0,0,0,0,0]
   },
-
   {
     text:"در فصل گرما وضعیت بدنی شما چگونه است؟",
     weight:1,
     thermal:[-2,-1,0,1,2],
     moisture:[0,0,0,0,0]
   },
-
   {
     text:"در فصل سرما وضعیت بدنی شما چگونه است؟",
     weight:1,
     thermal:[2,1,0,-1,-2],
     moisture:[0,0,0,0,0]
   },
-
   {
     text:"پوست شما معمولاً چگونه است؟",
     weight:1,
     thermal:[0,0,0,0,0],
     moisture:[2,1,0,-1,-2]
   },
-
   {
     text:"میزان تعریق شما چگونه است؟",
     weight:1,
     thermal:[1,1,0,-1,-1],
     moisture:[2,1,0,-1,-2]
   },
-
   {
     text:"تشنگی شما معمولاً چقدر است؟",
     weight:1,
     thermal:[1,1,0,0,0],
     moisture:[-2,-1,0,1,2]
   },
-
   {
     text:"اشتها و میل شما به غذا چگونه است؟",
     weight:1,
     thermal:[2,1,0,-1,-2],
     moisture:[0,0,0,0,0]
   },
-
   {
     text:"هضم غذا در شما چگونه است؟",
     weight:1,
     thermal:[1,1,0,-1,-1],
     moisture:[0,0,0,0,0]
   },
-
   {
     text:"الگوی خواب شما چگونه است؟",
     weight:1,
     thermal:[0,0,0,0,0],
     moisture:[-1,-1,0,1,2]
   },
-
   {
     text:"سطح انرژی روزانه شما چگونه است؟",
     weight:1,
     thermal:[2,1,0,-1,-2],
     moisture:[0,0,0,0,0]
   },
-
   {
     text:"خلق‌وخو و تحریک‌پذیری شما چگونه است؟",
     weight:1,
     thermal:[2,1,0,-1,-2],
     moisture:[0,0,0,0,0]
   },
-
   {
     text:"سرعت صحبت کردن و حرکات شما چگونه است؟",
     weight:1,
     thermal:[2,1,0,-1,-2],
     moisture:[0,0,0,0,0]
   },
-
   {
     text:"وزن بدن شما معمولاً چگونه تغییر می‌کند؟",
     weight:1,
     thermal:[0,0,0,0,0],
     moisture:[-2,-1,0,1,2]
   },
-
   {
     text:"تمایل شما به نوشیدن آب چگونه است؟",
     weight:1,
     thermal:[0,0,0,0,0],
     moisture:[-2,-1,0,1,2]
   },
-
   {
     text:"وضعیت دفع شما معمولاً چگونه است؟",
     weight:1,
     thermal:[0,0,0,0,0],
     moisture:[-2,-1,0,1,2]
   },
-
   {
     text:"رنگ چهره شما معمولاً چگونه است؟",
     weight:1,
     thermal:[1,1,0,-1,-1],
     moisture:[0,0,0,0,0]
   },
-
   {
     text:"دست و پای شما معمولاً چه حالتی دارد؟",
     weight:1,
     thermal:[-2,-1,0,1,2],
     moisture:[0,0,0,0,0]
   },
-
   {
     text:"واکنش شما به استرس چگونه است؟",
     weight:1,
     thermal:[2,1,0,-1,-2],
     moisture:[0,0,0,0,0]
   },
-
   {
     text:"تمرکز و فعالیت ذهنی شما چگونه است؟",
     weight:1,
     thermal:[1,1,0,-1,-1],
     moisture:[-1,-1,0,1,2]
   },
-
   {
     text:"تحمل شما در برابر فعالیت بدنی چگونه است؟",
     weight:1,
     thermal:[2,1,0,-1,-2],
     moisture:[0,0,0,0,0]
   }
-
 ];
 
 const labelsByQ = [
@@ -1659,7 +151,6 @@ const labelsByQ = [
 ];
 
 const humors = [
-
   {
     key:"damavi",
     title:"🔴 دموی",
@@ -1672,7 +163,6 @@ const humors = [
       "نشاط و انرژی"
     ]
   },
-
   {
     key:"safrav",
     title:"🟡 صفراوی",
@@ -1685,7 +175,6 @@ const humors = [
       "تلخی دهان"
     ]
   },
-
   {
     key:"balghami",
     title:"🔵 بلغمی",
@@ -1698,7 +187,6 @@ const humors = [
       "بی‌حالی"
     ]
   },
-
   {
     key:"sodavi",
     title:"🟤 سوداوی",
@@ -1711,7 +199,6 @@ const humors = [
       "خشکی پوست"
     ]
   }
-
 ];
 
 
@@ -1723,18 +210,14 @@ function renderQuestions(){
 
   const container = document.getElementById("questions");
 
+  if(!container) return;
+
   container.innerHTML = qs.map((q,index)=>{
 
-    const labels = labelsByQ[index] || [
-      "خیلی کم",
-      "کم",
-      "متوسط",
-      "زیاد",
-      "خیلی زیاد"
-    ];
+    const labels = labelsByQ[index];
 
     return `
-      <div class="question">
+      <div class="question" id="questionBox${index}">
 
         <div class="question-title">
           ${index + 1}. ${q.text}
@@ -1767,7 +250,6 @@ function renderQuestions(){
     `;
 
   }).join("");
-
 }
 
 
@@ -1778,6 +260,8 @@ function renderQuestions(){
 function renderHumors(){
 
   const container = document.getElementById("humors");
+
+  if(!container) return;
 
   container.innerHTML = humors.map((humor,index)=>`
 
@@ -1811,7 +295,6 @@ function renderHumors(){
     </div>
 
   `).join("");
-
 }
 
 
@@ -1819,45 +302,49 @@ function renderHumors(){
    TEMPERAMENT
 ========================================================= */
 
-function getTemperament(thermal,moisture){
+function getTemperament(thermal, moisture){
 
-  let temp = "متعادل / ترکیبی";
+  if(thermal >= 12 && moisture >= 12)
+    return "دموی";
 
-  if(thermal >= 12 && moisture >= 12){
-    temp = "دموی";
-  }
-  else if(thermal >= 12 && moisture <= -12){
-    temp = "صفراوی";
-  }
-  else if(thermal <= -12 && moisture >= 12){
-    temp = "بلغمی";
-  }
-  else if(thermal <= -12 && moisture <= -12){
-    temp = "سوداوی";
-  }
-  else if(thermal >= 12){
-    temp = "گرم";
-  }
-  else if(thermal <= -12){
-    temp = "سرد";
-  }
-  else if(moisture >= 12){
-    temp = "تر";
-  }
-  else if(moisture <= -12){
-    temp = "خشک";
-  }
+  if(thermal >= 12 && moisture <= -12)
+    return "صفراوی";
 
-  return temp;
+  if(thermal <= -12 && moisture >= 12)
+    return "بلغمی";
+
+  if(thermal <= -12 && moisture <= -12)
+    return "سوداوی";
+
+  if(thermal >= 12)
+    return "گرم";
+
+  if(thermal <= -12)
+    return "سرد";
+
+  if(moisture >= 12)
+    return "تر";
+
+  if(moisture <= -12)
+    return "خشک";
+
+  return "متعادل / ترکیبی";
 }
 
 
 function temperamentClass(temp){
 
-  if(temp.includes("دموی")) return "temperament-damavi";
-  if(temp.includes("صفراوی")) return "temperament-safrav";
-  if(temp.includes("بلغمی")) return "temperament-balghami";
-  if(temp.includes("سوداوی")) return "temperament-sodavi";
+  if(temp.includes("دموی"))
+    return "temperament-damavi";
+
+  if(temp.includes("صفراوی"))
+    return "temperament-safrav";
+
+  if(temp.includes("بلغمی"))
+    return "temperament-balghami";
+
+  if(temp.includes("سوداوی"))
+    return "temperament-sodavi";
 
   return "temperament-neutral";
 }
@@ -1868,30 +355,39 @@ function temperamentDescription(temp){
   const descriptions = {
 
     "دموی":
-      "الگوی غالب، گرم و تر است. در این ارزیابی شاخص‌های گرمی و رطوبت نسبت به سایر محورهای مزاجی برجسته‌تر بوده‌اند.",
+      "الگوی غالب گرم و تر است. شاخص‌های گرمی و رطوبت در پاسخ‌های ثبت‌شده برجستگی بیشتری داشته‌اند.",
 
     "صفراوی":
-      "الگوی غالب، گرم و خشک است. شاخص‌های گرمی و خشکی در پاسخ‌های ثبت‌شده برجستگی بیشتری نشان داده‌اند.",
+      "الگوی غالب گرم و خشک است. شاخص‌های گرمی و خشکی در پاسخ‌های ثبت‌شده برجستگی بیشتری داشته‌اند.",
 
     "بلغمی":
-      "الگوی غالب، سرد و تر است. شاخص‌های سردی و رطوبت در پاسخ‌های ثبت‌شده برجسته‌تر بوده‌اند.",
+      "الگوی غالب سرد و تر است. شاخص‌های سردی و رطوبت در پاسخ‌های ثبت‌شده برجستگی بیشتری داشته‌اند.",
 
     "سوداوی":
-      "الگوی غالب، سرد و خشک است. شاخص‌های سردی و خشکی در پاسخ‌های ثبت‌شده برجستگی بیشتری داشته‌اند."
+      "الگوی غالب سرد و خشک است. شاخص‌های سردی و خشکی در پاسخ‌های ثبت‌شده برجستگی بیشتری داشته‌اند."
 
   };
 
   return descriptions[temp] ||
-    "نتیجه ارزیابی در محدوده متعادل یا ترکیبی قرار گرفته است و برای تفسیر دقیق‌تر باید مجموعه علائم، سابقه و شرایط فردی نیز در نظر گرفته شود.";
+    "نتیجه در محدوده متعادل یا ترکیبی قرار گرفته است. برای تفسیر نهایی، علائم و شرایط فردی نیز باید در نظر گرفته شوند.";
 }
 
 
 /* =========================================================
-   HUMOR DOT
+   DOMINANT HUMOR
 ========================================================= */
 
-function getHumorDot(key){
-  return `<span class="dot dot-${key}"></span>`;
+function dominantName(key){
+
+  const names = {
+    damavi:"دموی",
+    safrav:"صفراوی",
+    balghami:"بلغمی",
+    sodavi:"سوداوی",
+    ترکیبی:"ترکیبی"
+  };
+
+  return names[key] || "نامشخص";
 }
 
 
@@ -1901,274 +397,451 @@ function getHumorDot(key){
 
 function calculate(){
 
-  let thermal = 0;
-  let moisture = 0;
+  try{
 
-  qs.forEach((q,index)=>{
+    let thermal = 0;
+    let moisture = 0;
 
-    const selected = document.querySelector(
-      `input[name="q${index}"]:checked`
-    );
+    const unanswered = [];
 
-    if(!selected) return;
+    /* -----------------------------------------
+       بررسی و محاسبه 20 سؤال
+    ----------------------------------------- */
 
-    const value = Number(selected.value);
+    qs.forEach((q,index)=>{
 
-    thermal += q.thermal[value] * q.weight;
-    moisture += q.moisture[value] * q.weight;
+      const selected = document.querySelector(
+        `input[name="q${index}"]:checked`
+      );
 
-  });
+      if(!selected){
 
+        unanswered.push(index + 1);
+        return;
+      }
 
-  /* -------------------------
-     Temperament
-  ------------------------- */
+      const value = Number(selected.value);
 
-  const temp = getTemperament(thermal,moisture);
+      if(
+        Number.isNaN(value) ||
+        !q.thermal[value] === undefined
+      ){
+        throw new Error(
+          `خطا در پاسخ سؤال شماره ${index + 1}`
+        );
+      }
 
-  let clarity = "متوسط";
+      thermal += Number(q.thermal[value] || 0) * q.weight;
+      moisture += Number(q.moisture[value] || 0) * q.weight;
 
-  if(
-    Math.abs(thermal) >= 24 &&
-    Math.abs(moisture) >= 24
-  ){
-    clarity = "بسیار واضح";
-  }
-  else if(
-    Math.abs(thermal) >= 18 &&
-    Math.abs(moisture) >= 18
-  ){
-    clarity = "واضح";
-  }
-
-
-  /* -------------------------
-     Humors
-  ------------------------- */
-
-  const humorScores = {
-
-    damavi:
-      document.querySelectorAll(
-        'input[name="damavi"]:checked'
-      ).length,
-
-    safrav:
-      document.querySelectorAll(
-        'input[name="safrav"]:checked'
-      ).length,
-
-    balghami:
-      document.querySelectorAll(
-        'input[name="balghami"]:checked'
-      ).length,
-
-    sodavi:
-      document.querySelectorAll(
-        'input[name="sodavi"]:checked'
-      ).length
-
-  };
+    });
 
 
-  const sortedHumors = Object.entries(humorScores)
-    .sort((a,b)=>b[1]-a[1]);
+    /* -----------------------------------------
+       جلوگیری از محاسبه ناقص
+    ----------------------------------------- */
 
-  let dominant = sortedHumors[0][0];
+    if(unanswered.length > 0){
 
-  if(
-    sortedHumors.length > 1 &&
-    sortedHumors[0][1] === sortedHumors[1][1]
-  ){
-    dominant = "ترکیبی";
-  }
+      alert(
+        "لطفاً به همه ۲۰ سؤال پاسخ دهید.\n\n" +
+        "سؤال‌های بدون پاسخ:\n" +
+        unanswered.join("، ")
+      );
 
+      const firstQuestion =
+        document.getElementById(
+          `questionBox${unanswered[0] - 1}`
+        );
 
-  /* -------------------------
-     Percentage Model
-  ------------------------- */
+      if(firstQuestion){
 
-  const warm = Math.max(0,thermal);
-  const cold = Math.max(0,-thermal);
+        firstQuestion.scrollIntoView({
+          behavior:"smooth",
+          block:"center"
+        });
 
-  const wet = Math.max(0,moisture);
-  const dry = Math.max(0,-moisture);
+      }
 
-  const raw = {
-
-    damavi: warm + wet,
-
-    safrav: warm + dry,
-
-    balghami: cold + wet,
-
-    sodavi: cold + dry
-
-  };
+      return;
+    }
 
 
-  const total = Object.values(raw)
-    .reduce((sum,value)=>sum + value,0);
+    /* -----------------------------------------
+       مزاج
+    ----------------------------------------- */
+
+    const temp =
+      getTemperament(thermal,moisture);
 
 
-  const percentages = total === 0
-    ? {
+    /* -----------------------------------------
+       وضوح
+    ----------------------------------------- */
+
+    let clarity = "متوسط";
+
+    if(
+      Math.abs(thermal) >= 24 &&
+      Math.abs(moisture) >= 24
+    ){
+
+      clarity = "بسیار واضح";
+
+    }
+    else if(
+      Math.abs(thermal) >= 18 &&
+      Math.abs(moisture) >= 18
+    ){
+
+      clarity = "واضح";
+
+    }
+
+
+    /* -----------------------------------------
+       اخلاط
+    ----------------------------------------- */
+
+    const humorScores = {
+
+      damavi:
+        document.querySelectorAll(
+          'input[name="damavi"]:checked'
+        ).length,
+
+      safrav:
+        document.querySelectorAll(
+          'input[name="safrav"]:checked'
+        ).length,
+
+      balghami:
+        document.querySelectorAll(
+          'input[name="balghami"]:checked'
+        ).length,
+
+      sodavi:
+        document.querySelectorAll(
+          'input[name="sodavi"]:checked'
+        ).length
+
+    };
+
+
+    const sortedHumors =
+      Object.entries(humorScores)
+        .sort((a,b)=>b[1]-a[1]);
+
+
+    let dominant =
+      sortedHumors[0][0];
+
+
+    if(
+      sortedHumors[0][1] ===
+      sortedHumors[1][1]
+    ){
+
+      dominant = "ترکیبی";
+
+    }
+
+
+    /* -----------------------------------------
+       درصد مزاج‌ها
+    ----------------------------------------- */
+
+    const warm =
+      Math.max(0,thermal);
+
+    const cold =
+      Math.max(0,-thermal);
+
+    const wet =
+      Math.max(0,moisture);
+
+    const dry =
+      Math.max(0,-moisture);
+
+
+    const raw = {
+
+      damavi: warm + wet,
+
+      safrav: warm + dry,
+
+      balghami: cold + wet,
+
+      sodavi: cold + dry
+
+    };
+
+
+    const total =
+      Object.values(raw)
+        .reduce(
+          (sum,value)=>sum + value,
+          0
+        );
+
+
+    let percentages;
+
+
+    if(total === 0){
+
+      percentages = {
         damavi:25,
         safrav:25,
         balghami:25,
         sodavi:25
-      }
-    : {
-        damavi:(raw.damavi / total) * 100,
-        safrav:(raw.safrav / total) * 100,
-        balghami:(raw.balghami / total) * 100,
-        sodavi:(raw.sodavi / total) * 100
       };
 
+    }
+    else{
 
-  /* -------------------------
-     Patient Data
-  ------------------------- */
+      percentages = {
 
-  const name =
-    document.getElementById("name").value.trim() || "—";
+        damavi:
+          raw.damavi / total * 100,
 
-  const caseNo =
-    document.getElementById("caseNo").value.trim() || "—";
+        safrav:
+          raw.safrav / total * 100,
 
-  const age =
-    document.getElementById("age").value.trim() || "—";
+        balghami:
+          raw.balghami / total * 100,
 
-  const sex =
-    document.getElementById("sex").value || "—";
+        sodavi:
+          raw.sodavi / total * 100
 
-  const phone =
-    document.getElementById("phone").value.trim() || "—";
+      };
 
-  const date =
-    document.getElementById("date").value || "—";
-
-  const note =
-    document.getElementById("initialNote").value.trim() ||
-    "یادداشت خاصی ثبت نشده است.";
+    }
 
 
-  /* -------------------------
-     Report Header
-  ------------------------- */
+    /* -----------------------------------------
+       اطلاعات مراجعه کننده
+    ----------------------------------------- */
 
-  document.getElementById("rName").textContent = name;
-  document.getElementById("rCaseNo").textContent = caseNo;
-  document.getElementById("rAge").textContent = age;
-  document.getElementById("rSex").textContent = sex;
-  document.getElementById("rPhone").textContent = phone;
-  document.getElementById("rDate").textContent = formatDate(date);
-
-  document.getElementById("reportInitialNote").textContent = note;
+    const getValue = id =>
+      document.getElementById(id)?.value?.trim() || "—";
 
 
-  /* -------------------------
-     Result Hero
-  ------------------------- */
+    const name =
+      getValue("name");
 
-  const hero = document.getElementById("resultHero");
+    const caseNo =
+      getValue("caseNo");
 
-  hero.className =
-    "result-hero " + temperamentClass(temp);
+    const age =
+      getValue("age");
 
-  document.getElementById("resultTitle").textContent =
-    temp;
+    const sex =
+      document.getElementById("sex")?.value || "—";
 
-  document.getElementById("resultSubtitle").textContent =
-    `الگوی غالب اخلاطی: ${dominantName(dominant)} | وضوح نتیجه: ${clarity}`;
+    const phone =
+      getValue("phone");
 
+    const date =
+      document.getElementById("date")?.value || "—";
 
-  document.getElementById("thermalResult").textContent =
-    thermal > 0
-      ? `گرم (${thermal})`
-      : thermal < 0
-        ? `سرد (${Math.abs(thermal)})`
-        : "متعادل (0)";
-
-
-  document.getElementById("moistureResult").textContent =
-    moisture > 0
-      ? `تر (${moisture})`
-      : moisture < 0
-        ? `خشک (${Math.abs(moisture)})`
-        : "متعادل (0)";
+    const note =
+      getValue("initialNote") === "—"
+        ? "یادداشت خاصی ثبت نشده است."
+        : getValue("initialNote");
 
 
-  document.getElementById("clarityResult").textContent =
-    clarity;
+    /* -----------------------------------------
+       پر کردن گزارش
+    ----------------------------------------- */
+
+    document.getElementById("rName").textContent =
+      name;
+
+    document.getElementById("rCaseNo").textContent =
+      caseNo;
+
+    document.getElementById("rAge").textContent =
+      age;
+
+    document.getElementById("rSex").textContent =
+      sex;
+
+    document.getElementById("rPhone").textContent =
+      phone;
+
+    document.getElementById("rDate").textContent =
+      formatDate(date);
+
+    document.getElementById("reportInitialNote").textContent =
+      note;
 
 
-  document.getElementById("temperamentDescription").textContent =
-    temperamentDescription(temp);
+    /* -----------------------------------------
+       نتیجه اصلی
+    ----------------------------------------- */
+
+    const hero =
+      document.getElementById("resultHero");
 
 
-  /* -------------------------
-     Humor Scores
-  ------------------------- */
-
-  updateHumorResult(
-    "damavi",
-    humorScores.damavi
-  );
-
-  updateHumorResult(
-    "safrav",
-    humorScores.safrav
-  );
-
-  updateHumorResult(
-    "balghami",
-    humorScores.balghami
-  );
-
-  updateHumorResult(
-    "sodavi",
-    humorScores.sodavi
-  );
+    hero.className =
+      "result-hero " +
+      temperamentClass(temp);
 
 
-  /* -------------------------
-     Chart
-  ------------------------- */
-
-  setChart(
-    "Damavi",
-    percentages.damavi
-  );
-
-  setChart(
-    "Safrav",
-    percentages.safrav
-  );
-
-  setChart(
-    "Balgham",
-    percentages.balghami
-  );
-
-  setChart(
-    "Soda",
-    percentages.sodavi
-  );
+    document.getElementById("resultTitle").textContent =
+      temp;
 
 
-  /* -------------------------
-     Show Report
-  ------------------------- */
+    document.getElementById("resultSubtitle").textContent =
+      "الگوی غالب اخلاطی: " +
+      dominantName(dominant) +
+      " | وضوح نتیجه: " +
+      clarity;
 
-  const report = document.getElementById("report");
 
-  report.style.display = "block";
+    /* -----------------------------------------
+       محور حرارتی
+    ----------------------------------------- */
 
-  report.scrollIntoView({
-    behavior:"smooth",
-    block:"start"
-  });
+    let thermalText = "متعادل (0)";
+
+    if(thermal > 0){
+
+      thermalText =
+        `گرم (${thermal})`;
+
+    }
+    else if(thermal < 0){
+
+      thermalText =
+        `سرد (${Math.abs(thermal)})`;
+
+    }
+
+
+    document.getElementById("thermalResult").textContent =
+      thermalText;
+
+
+    /* -----------------------------------------
+       محور رطوبتی
+    ----------------------------------------- */
+
+    let moistureText = "متعادل (0)";
+
+    if(moisture > 0){
+
+      moistureText =
+        `تر (${moisture})`;
+
+    }
+    else if(moisture < 0){
+
+      moistureText =
+        `خشک (${Math.abs(moisture)})`;
+
+    }
+
+
+    document.getElementById("moistureResult").textContent =
+      moistureText;
+
+
+    document.getElementById("clarityResult").textContent =
+      clarity;
+
+
+    document.getElementById("temperamentDescription").textContent =
+      temperamentDescription(temp);
+
+
+    /* -----------------------------------------
+       نتایج اخلاط
+    ----------------------------------------- */
+
+    updateHumorResult(
+      "damavi",
+      humorScores.damavi
+    );
+
+    updateHumorResult(
+      "safrav",
+      humorScores.safrav
+    );
+
+    updateHumorResult(
+      "balghami",
+      humorScores.balghami
+    );
+
+    updateHumorResult(
+      "sodavi",
+      humorScores.sodavi
+    );
+
+
+    /* -----------------------------------------
+       نمودار
+    ----------------------------------------- */
+
+    setChart(
+      "Damavi",
+      percentages.damavi
+    );
+
+    setChart(
+      "Safrav",
+      percentages.safrav
+    );
+
+    setChart(
+      "Balgham",
+      percentages.balghami
+    );
+
+    setChart(
+      "Soda",
+      percentages.sodavi
+    );
+
+
+    /* -----------------------------------------
+       نمایش گزارش
+    ----------------------------------------- */
+
+    const report =
+      document.getElementById("report");
+
+
+    report.style.display =
+      "block";
+
+
+    setTimeout(()=>{
+
+      report.scrollIntoView({
+        behavior:"smooth",
+        block:"start"
+      });
+
+    },100);
+
+  }
+  catch(error){
+
+    console.error(
+      "CALCULATION ERROR:",
+      error
+    );
+
+    alert(
+      "در محاسبه ارزیابی خطایی رخ داده است.\n\n" +
+      error.message
+    );
+
+  }
 
 }
 
@@ -2182,22 +855,52 @@ function setChart(name,value){
   const rounded =
     Math.round(value * 10) / 10;
 
+
   const bar =
-    document.getElementById("chart" + name);
+    document.getElementById(
+      "chart" + name
+    );
+
 
   const valueEl =
-    document.getElementById("chart" + name + "Value");
+    document.getElementById(
+      "chart" + name + "Value"
+    );
 
-  bar.dataset.height = rounded;
-  bar.style.height = "0%";
+
+  if(!bar || !valueEl){
+
+    console.error(
+      "Chart element not found:",
+      name
+    );
+
+    return;
+  }
+
+
+  bar.dataset.height =
+    rounded;
+
+
+  bar.style.height =
+    "0%";
+
 
   valueEl.textContent =
     rounded + "%";
 
-  setTimeout(()=>{
-    bar.style.height =
-      rounded + "%";
-  },100);
+
+  requestAnimationFrame(()=>{
+
+    setTimeout(()=>{
+
+      bar.style.height =
+        rounded + "%";
+
+    },50);
+
+  });
 
 }
 
@@ -2208,43 +911,42 @@ function setChart(name,value){
 
 function updateHumorResult(key,score){
 
-  const percentage =
-    Math.round((score / 6) * 100);
+  const scoreElement =
+    document.getElementById(
+      key + "Score"
+    );
 
-  document.getElementById(
-    key + "Score"
-  ).textContent =
+
+  const progressElement =
+    document.getElementById(
+      key + "Progress"
+    );
+
+
+  if(!scoreElement || !progressElement){
+
+    console.error(
+      "Humor result element not found:",
+      key
+    );
+
+    return;
+  }
+
+
+  const percentage =
+    Math.round(
+      (score / 6) * 100
+    );
+
+
+  scoreElement.textContent =
     `${score}/6`;
 
-  document.getElementById(
-    key + "Progress"
-  ).style.width =
+
+  progressElement.style.width =
     percentage + "%";
 
-}
-
-
-/* =========================================================
-   DOMINANT HUMOR NAME
-========================================================= */
-
-function dominantName(key){
-
-  const names = {
-
-    damavi:"دموی",
-
-    safrav:"صفراوی",
-
-    balghami:"بلغمی",
-
-    sodavi:"سوداوی",
-
-    ترکیبی:"ترکیبی"
-
-  };
-
-  return names[key] || "نامشخص";
 }
 
 
@@ -2254,15 +956,20 @@ function dominantName(key){
 
 function formatDate(date){
 
-  if(!date) return "—";
+  if(!date)
+    return "—";
+
 
   const parts =
     date.split("-");
 
+
   if(parts.length !== 3)
     return date;
 
+
   return `${parts[2]}/${parts[1]}/${parts[0]}`;
+
 }
 
 
@@ -2272,61 +979,79 @@ function formatDate(date){
 
 function saveCase(){
 
-  calculate();
+  try{
 
-  const cases =
-    JSON.parse(
-      localStorage.getItem("hakimCases") || "[]"
+    const cases =
+      JSON.parse(
+        localStorage.getItem(
+          "hakimCases"
+        ) || "[]"
+      );
+
+
+    const record = {
+
+      id:Date.now(),
+
+      name:
+        document.getElementById("name").value.trim(),
+
+      caseNo:
+        document.getElementById("caseNo").value.trim(),
+
+      age:
+        document.getElementById("age").value.trim(),
+
+      sex:
+        document.getElementById("sex").value,
+
+      phone:
+        document.getElementById("phone").value.trim(),
+
+      date:
+        document.getElementById("date").value,
+
+      note:
+        document.getElementById("initialNote").value.trim(),
+
+      savedAt:
+        new Date().toISOString()
+
+    };
+
+
+    cases.unshift(record);
+
+
+    if(cases.length > 100){
+      cases.length = 100;
+    }
+
+
+    localStorage.setItem(
+      "hakimCases",
+      JSON.stringify(cases)
     );
 
 
-  const record = {
-
-    id:Date.now(),
-
-    name:
-      document.getElementById("name").value.trim(),
-
-    caseNo:
-      document.getElementById("caseNo").value.trim(),
-
-    age:
-      document.getElementById("age").value.trim(),
-
-    sex:
-      document.getElementById("sex").value,
-
-    phone:
-      document.getElementById("phone").value.trim(),
-
-    date:
-      document.getElementById("date").value,
-
-    note:
-      document.getElementById("initialNote").value.trim(),
-
-    savedAt:
-      new Date().toISOString()
-
-  };
+    renderCases();
 
 
-  cases.unshift(record);
+    alert(
+      "پرونده با موفقیت ذخیره شد."
+    );
 
-  if(cases.length > 100){
-    cases.length = 100;
+  }
+  catch(error){
+
+    console.error(error);
+
+    alert(
+      "ذخیره پرونده انجام نشد."
+    );
+
   }
 
-
-  localStorage.setItem(
-    "hakimCases",
-    JSON.stringify(cases)
-  );
-
-
-  renderCases();
-
-  alert("پرونده با موفقیت ذخیره شد.");
 }
 
 
@@ -2337,12 +1062,33 @@ function saveCase(){
 function renderCases(){
 
   const list =
-    document.getElementById("caseList");
-
-  const cases =
-    JSON.parse(
-      localStorage.getItem("hakimCases") || "[]"
+    document.getElementById(
+      "caseList"
     );
+
+
+  if(!list)
+    return;
+
+
+  let cases = [];
+
+
+  try{
+
+    cases =
+      JSON.parse(
+        localStorage.getItem(
+          "hakimCases"
+        ) || "[]"
+      );
+
+  }
+  catch(error){
+
+    cases = [];
+
+  }
 
 
   if(!cases.length){
@@ -2364,19 +1110,27 @@ function renderCases(){
         <div class="case-info">
 
           <strong>
-            ${escapeHtml(item.name || "بدون نام")}
+            ${escapeHtml(
+              item.name || "بدون نام"
+            )}
           </strong>
 
           <br>
 
           پرونده:
-          ${escapeHtml(item.caseNo || "—")}
+          ${escapeHtml(
+            item.caseNo || "—"
+          )}
 
           |
+
           سن:
-          ${escapeHtml(item.age || "—")}
+          ${escapeHtml(
+            item.age || "—"
+          )}
 
           |
+
           تاریخ:
           ${formatDate(item.date)}
 
@@ -2415,13 +1169,20 @@ function loadCase(id){
 
   const cases =
     JSON.parse(
-      localStorage.getItem("hakimCases") || "[]"
+      localStorage.getItem(
+        "hakimCases"
+      ) || "[]"
     );
 
-  const item =
-    cases.find(x=>x.id === id);
 
-  if(!item) return;
+  const item =
+    cases.find(
+      x => x.id === id
+    );
+
+
+  if(!item)
+    return;
 
 
   document.getElementById("name").value =
@@ -2446,7 +1207,18 @@ function loadCase(id){
     item.note || "";
 
 
-  calculate();
+  /*
+     توجه:
+     در ساختار فعلی پرونده‌ها پاسخ 20 سؤال
+     ذخیره نمی‌شود؛ بنابراین بعد از بارگذاری
+     پرونده نمی‌توان محاسبه قبلی را بازسازی کرد.
+  */
+
+  alert(
+    "اطلاعات مراجعه‌کننده بارگذاری شد.\n" +
+    "برای محاسبه، پاسخ سؤال‌ها را نیز وارد کنید."
+  );
+
 
   window.scrollTo({
     top:0,
@@ -2462,24 +1234,37 @@ function loadCase(id){
 
 function delCase(id){
 
-  if(!confirm("آیا از حذف این پرونده مطمئن هستید؟")){
+  if(
+    !confirm(
+      "آیا از حذف این پرونده مطمئن هستید؟"
+    )
+  ){
     return;
   }
 
+
   let cases =
     JSON.parse(
-      localStorage.getItem("hakimCases") || "[]"
+      localStorage.getItem(
+        "hakimCases"
+      ) || "[]"
     );
 
+
   cases =
-    cases.filter(x=>x.id !== id);
+    cases.filter(
+      x => x.id !== id
+    );
+
 
   localStorage.setItem(
     "hakimCases",
     JSON.stringify(cases)
   );
 
+
   renderCases();
+
 }
 
 
@@ -2498,19 +1283,33 @@ function resetForm(){
   }
 
 
-  document.getElementById("name").value = "";
-  document.getElementById("caseNo").value = "";
-  document.getElementById("age").value = "";
-  document.getElementById("sex").value = "";
-  document.getElementById("phone").value = "";
-  document.getElementById("date").value = "";
-  document.getElementById("initialNote").value = "";
+  [
+    "name",
+    "caseNo",
+    "age",
+    "phone",
+    "initialNote"
+  ].forEach(id=>{
+
+    const element =
+      document.getElementById(id);
+
+    if(element)
+      element.value = "";
+
+  });
+
+
+  document.getElementById("sex").value =
+    "";
 
 
   document.querySelectorAll(
     'input[type="radio"], input[type="checkbox"]'
   ).forEach(input=>{
+
     input.checked = false;
+
   });
 
 
@@ -2533,15 +1332,23 @@ function resetForm(){
 function printReport(){
 
   const report =
-    document.getElementById("report");
+    document.getElementById(
+      "report"
+    );
+
 
   if(
     !report ||
     report.style.display === "none"
   ){
-    alert("ابتدا نتیجه ارزیابی را محاسبه کنید.");
+
+    alert(
+      "ابتدا نتیجه ارزیابی را محاسبه کنید."
+    );
+
     return;
   }
+
 
   window.print();
 
@@ -2555,11 +1362,11 @@ function printReport(){
 function escapeHtml(value){
 
   return String(value)
-    .replaceAll("&","&amp;")
-    .replaceAll("<","&lt;")
-    .replaceAll(">","&gt;")
-    .replaceAll('"',"&quot;")
-    .replaceAll("'","&#039;");
+    .replace(/&/g,"&amp;")
+    .replace(/</g,"&lt;")
+    .replace(/>/g,"&gt;")
+    .replace(/"/g,"&quot;")
+    .replace(/'/g,"&#039;");
 
 }
 
@@ -2569,35 +1376,50 @@ function escapeHtml(value){
 ========================================================= */
 
 renderQuestions();
+
 renderHumors();
+
 renderCases();
 
 
-/* Default date */
+/* تاریخ امروز */
 
 (function(){
 
   const date =
-    document.getElementById("date");
+    document.getElementById(
+      "date"
+    );
 
-  if(date && !date.value){
+
+  if(
+    date &&
+    !date.value
+  ){
 
     const now =
       new Date();
 
+
     const year =
       now.getFullYear();
 
+
     const month =
-      String(now.getMonth()+1)
-        .padStart(2,"0");
+      String(
+        now.getMonth() + 1
+      ).padStart(2,"0");
+
 
     const day =
-      String(now.getDate())
-        .padStart(2,"0");
+      String(
+        now.getDate()
+      ).padStart(2,"0");
+
 
     date.value =
       `${year}-${month}-${day}`;
+
   }
 
 })();
@@ -2607,17 +1429,19 @@ renderCases();
    PWA
 ========================================================= */
 
-if("serviceWorker" in navigator){
+if(
+  "serviceWorker" in navigator
+){
 
   window.addEventListener(
     "load",
     ()=>{
       navigator.serviceWorker
         .register("sw.js")
-        .catch(err=>{
+        .catch(error=>{
           console.log(
             "Service Worker Error:",
-            err
+            error
           );
         });
     }
@@ -2626,6 +1450,3 @@ if("serviceWorker" in navigator){
 }
 
 </script>
-
-</body>
-</html>
