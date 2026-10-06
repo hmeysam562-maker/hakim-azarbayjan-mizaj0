@@ -1,1452 +1,1233 @@
+
+
+<!doctype html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#17451f">
+<meta name="description" content="سامانه حرفه‌ای ارزیابی مزاج حکیم آذربایجان">
+<link rel="manifest" href="manifest.json">
+<link rel="icon" href="logo.png">
+<title>ارزیابی مزاج | حکیم آذربایجان</title>
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;500;600;700;800&display=swap');
+
+:root{
+--green:#17451f;
+--green2:#286b32;
+--gold:#b78620;
+--cream:#fbfaf5;
+--ink:#172018;
+--muted:#6b746c;
+--line:#e5e3d8;
+--card:#fff;
+--danger:#9b2c2c
+}
+
+*{box-sizing:border-box}
+
+body{
+margin:0;
+background:linear-gradient(135deg,#f7f8f1,#fdfcf9);
+color:var(--ink);
+font-family:Vazirmatn,Tahoma,sans-serif
+}
+
+header{
+background:linear-gradient(135deg,#123919,#286b32);
+color:#fff;
+padding:18px 16px 22px;
+box-shadow:0 4px 20px #0002
+}
+
+.brand{
+max-width:980px;
+margin:auto;
+display:flex;
+align-items:center;
+gap:14px
+}
+
+.brand img{
+width:72px;
+height:72px;
+border-radius:50%;
+background:#fff;
+object-fit:cover
+}
+
+.brand h1{
+font-size:21px;
+margin:0 0 4px
+}
+
+.brand p{
+margin:0;
+opacity:.86;
+font-size:12px
+}
+
+main{
+max-width:980px;
+margin:20px auto;
+padding:0 14px
+}
+
+.card{
+background:var(--card);
+border:1px solid var(--line);
+border-radius:18px;
+padding:18px;
+margin-bottom:16px;
+box-shadow:0 7px 25px #193d1b0b
+}
+
+h2{
+font-size:18px;
+margin:0 0 14px;
+color:var(--green)
+}
+
+.grid{
+display:grid;
+grid-template-columns:repeat(2,1fr);
+gap:12px
+}
+
+.field label{
+display:block;
+font-size:13px;
+font-weight:600;
+margin-bottom:6px
+}
+
+.field input,
+.field select,
+.field textarea{
+width:100%;
+border:1px solid #d9d8cf;
+border-radius:11px;
+padding:11px;
+font:inherit;
+background:#fff
+}
+
+.field textarea{
+min-height:80px;
+resize:vertical
+}
+
+.full{
+grid-column:1/-1
+}
+
+.q{
+padding:15px 0;
+border-top:1px solid #eee
+}
+
+.q:first-child{
+border-top:0
+}
+
+.q-title{
+font-weight:700;
+font-size:14px;
+margin-bottom:10px
+}
+
+.options{
+display:grid;
+grid-template-columns:repeat(4,1fr);
+gap:7px
+}
+
+.options label{
+border:1px solid #dddcd3;
+border-radius:10px;
+padding:9px 6px;
+text-align:center;
+font-size:12px;
+cursor:pointer;
+background:#fff
+}
+
+.options input{
+display:none
+}
+
+.options label:has(input:checked){
+background:#edf5eb;
+border-color:#4c8954;
+color:#17451f;
+font-weight:700
+}
+
+.actions{
+display:flex;
+gap:10px;
+flex-wrap:wrap
+}
+
+.btn{
+border:0;
+border-radius:12px;
+padding:12px 18px;
+font:inherit;
+font-weight:700;
+cursor:pointer
+}
+
+.primary{
+background:var(--green);
+color:#fff
+}
+
+.secondary{
+background:#eeeadd;
+color:#304334
+}
+
+.danger{
+background:#fbeaea;
+color:var(--danger)
+}
+
+.result{
+display:none
+}
+
+.result.show{
+display:block
+}
+
+.scoregrid{
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:12px
+}
+
+.score{
+padding:15px;
+border-radius:14px;
+background:#f5f7f0;
+border:1px solid #e1e7da
+}
+
+.score b{
+font-size:20px;
+color:var(--green)
+}
+
+.badge{
+display:inline-block;
+padding:6px 11px;
+border-radius:999px;
+background:#eaf4e8;
+color:var(--green);
+font-weight:700;
+font-size:13px
+}
+
+.note{
+font-size:12px;
+color:var(--muted);
+line-height:1.9
+}
+
+table{
+width:100%;
+border-collapse:collapse;
+font-size:13px
+}
+
+th,td{
+padding:9px;
+border-bottom:1px solid #eee;
+text-align:right
+}
+
+th{
+background:#f5f5ef
+}
+
+.case{
+display:flex;
+justify-content:space-between;
+gap:10px;
+align-items:center;
+border-bottom:1px solid #eee;
+padding:10px 0
+}
+
+.case:last-child{
+border:0
+}
+
+footer{
+text-align:center;
+color:#777;
+font-size:11px;
+padding:20px
+}
+
+@media(max-width:650px){
+
+.grid,
+.scoregrid{
+grid-template-columns:1fr
+}
+
+.options{
+grid-template-columns:repeat(2,1fr)
+}
+
+.brand img{
+width:60px;
+height:60px
+}
+
+.brand h1{
+font-size:18px
+}
+
+}
+
+@media print{
+
+header,
+.actions,
+.intake,
+.questions,
+.cases,
+footer{
+display:none!important
+}
+
+main{
+margin:0;
+max-width:none
+}
+
+.result{
+display:block!important
+}
+
+.card{
+box-shadow:none
+}
+
+}
+</style>
+</head>
+
+<body>
+
+<header>
+<div class="brand">
+
+<img src="logo.png" alt="لوگوی حکیم آذربایجان">
+
+<div>
+<h1>سلامتکده و عطاری حکیم آذربایجان</h1>
+<p>سامانه حرفه‌ای ارزیابی مزاج و بررسی غلبه اخلاط</p>
+</div>
+
+</div>
+</header>
+
+<main>
+
+<section class="card intake">
+
+<h2>۱) مشخصات مراجعه‌کننده</h2>
+
+<div class="grid">
+
+<div class="field">
+<label>نام و نام خانوادگی</label>
+<input id="name">
+</div>
+
+<div class="field">
+<label>شماره پرونده</label>
+<input id="caseNo">
+</div>
+
+<div class="field">
+<label>سن</label>
+<input id="age" type="number" min="0">
+</div>
+
+<div class="field">
+<label>جنسیت</label>
+
+<select id="sex">
+
+<option value="">انتخاب کنید</option>
+<option>زن</option>
+<option>مرد</option>
+
+</select>
+
+</div>
+
+<div class="field">
+<label>شماره تماس</label>
+<input id="phone" inputmode="tel">
+</div>
+
+<div class="field">
+<label>تاریخ ارزیابی</label>
+<input id="date" type="date">
+</div>
+
+<div class="field full">
+<label>یادداشت اولیه درمانگر</label>
+<textarea id="initialNote"></textarea>
+</div>
+
+</div>
+
+</section>
+
+
+<section class="card questions">
+
+<h2>۲) ارزیابی مزاج ذاتی</h2>
+
+<p class="note">
+برای هر مورد، نزدیک‌ترین گزینه را انتخاب کنید.
+امتیاز داخلی هر پاسخ در چهار سطح از «خیلی سرد/خیلی خشک»
+تا «خیلی گرم/خیلی تر» تعریف شده و با وزن سؤال در دو محور
+گرمی/سردی و تری/خشکی محاسبه می‌شود.
+</p>
+
+<div id="questions"></div>
+
+</section>
+
+
+<section class="card questions">
+
+<h2>۳) غربالگری غلبه اخلاط فعلی</h2>
+
+<p class="note">
+شدت هر علامت را از «ندارد» تا «شدید» مشخص کنید.
+این بخش از مزاج ذاتی جداست و صرفاً غربالگری است.
+</p>
+
+<div id="humors"></div>
+
+</section>
+
+
+<section class="card actions questions">
+
+<button class="btn primary" onclick="calculate()">
+محاسبه و نمایش نتیجه
+</button>
+
+<button class="btn secondary" onclick="window.print()">
+چاپ / ذخیره PDF
+</button>
+
+<button class="btn secondary" onclick="saveCase()">
+ذخیره پرونده
+</button>
+
+</section>
+
+
+<section class="card result" id="result">
+
+<h2>گزارش ارزیابی</h2>
+
+<div id="report"></div>
+
+</section>
+
+
+<section class="card cases">
+
+<h2>پرونده‌های ذخیره‌شده روی این دستگاه</h2>
+
+<div id="caseList" class="note">
+هنوز پرونده‌ای ذخیره نشده است.
+</div>
+
+</section>
+
+</main>
+
+
+<footer>
+حکیم آذربایجان — این ابزار یک مدل غربالگری است و جایگزین تشخیص و ارزیابی بالینی نیست.
+</footer>
+
+
 <script>
 
-/* =========================================================
-   DATA
-========================================================= */
+const qs=[
 
-const qs = [
-  {
-    text:"بدن شما معمولاً چه احساسی دارد؟",
-    weight:1,
-    thermal:[-2,-1,0,1,2],
-    moisture:[0,0,0,0,0]
-  },
-  {
-    text:"در فصل گرما وضعیت بدنی شما چگونه است؟",
-    weight:1,
-    thermal:[-2,-1,0,1,2],
-    moisture:[0,0,0,0,0]
-  },
-  {
-    text:"در فصل سرما وضعیت بدنی شما چگونه است؟",
-    weight:1,
-    thermal:[2,1,0,-1,-2],
-    moisture:[0,0,0,0,0]
-  },
-  {
-    text:"پوست شما معمولاً چگونه است؟",
-    weight:1,
-    thermal:[0,0,0,0,0],
-    moisture:[2,1,0,-1,-2]
-  },
-  {
-    text:"میزان تعریق شما چگونه است؟",
-    weight:1,
-    thermal:[1,1,0,-1,-1],
-    moisture:[2,1,0,-1,-2]
-  },
-  {
-    text:"تشنگی شما معمولاً چقدر است؟",
-    weight:1,
-    thermal:[1,1,0,0,0],
-    moisture:[-2,-1,0,1,2]
-  },
-  {
-    text:"اشتها و میل شما به غذا چگونه است؟",
-    weight:1,
-    thermal:[2,1,0,-1,-2],
-    moisture:[0,0,0,0,0]
-  },
-  {
-    text:"هضم غذا در شما چگونه است؟",
-    weight:1,
-    thermal:[1,1,0,-1,-1],
-    moisture:[0,0,0,0,0]
-  },
-  {
-    text:"الگوی خواب شما چگونه است؟",
-    weight:1,
-    thermal:[0,0,0,0,0],
-    moisture:[-1,-1,0,1,2]
-  },
-  {
-    text:"سطح انرژی روزانه شما چگونه است؟",
-    weight:1,
-    thermal:[2,1,0,-1,-2],
-    moisture:[0,0,0,0,0]
-  },
-  {
-    text:"خلق‌وخو و تحریک‌پذیری شما چگونه است؟",
-    weight:1,
-    thermal:[2,1,0,-1,-2],
-    moisture:[0,0,0,0,0]
-  },
-  {
-    text:"سرعت صحبت کردن و حرکات شما چگونه است؟",
-    weight:1,
-    thermal:[2,1,0,-1,-2],
-    moisture:[0,0,0,0,0]
-  },
-  {
-    text:"وزن بدن شما معمولاً چگونه تغییر می‌کند؟",
-    weight:1,
-    thermal:[0,0,0,0,0],
-    moisture:[-2,-1,0,1,2]
-  },
-  {
-    text:"تمایل شما به نوشیدن آب چگونه است؟",
-    weight:1,
-    thermal:[0,0,0,0,0],
-    moisture:[-2,-1,0,1,2]
-  },
-  {
-    text:"وضعیت دفع شما معمولاً چگونه است؟",
-    weight:1,
-    thermal:[0,0,0,0,0],
-    moisture:[-2,-1,0,1,2]
-  },
-  {
-    text:"رنگ چهره شما معمولاً چگونه است؟",
-    weight:1,
-    thermal:[1,1,0,-1,-1],
-    moisture:[0,0,0,0,0]
-  },
-  {
-    text:"دست و پای شما معمولاً چه حالتی دارد؟",
-    weight:1,
-    thermal:[-2,-1,0,1,2],
-    moisture:[0,0,0,0,0]
-  },
-  {
-    text:"واکنش شما به استرس چگونه است؟",
-    weight:1,
-    thermal:[2,1,0,-1,-2],
-    moisture:[0,0,0,0,0]
-  },
-  {
-    text:"تمرکز و فعالیت ذهنی شما چگونه است؟",
-    weight:1,
-    thermal:[1,1,0,-1,-1],
-    moisture:[-1,-1,0,1,2]
-  },
-  {
-    text:"تحمل شما در برابر فعالیت بدنی چگونه است؟",
-    weight:1,
-    thermal:[2,1,0,-1,-2],
-    moisture:[0,0,0,0,0]
-  }
-];
+["عملکرد بدنی – سرعت و فعالیت",3,[-2,-1,1,2],[-1,-1,1,1]],
 
-const labelsByQ = [
-  ["خیلی سرد","سرد","متعادل","گرم","خیلی گرم"],
-  ["خیلی بد","بد","متوسط","خوب","خیلی خوب"],
-  ["خیلی خوب","خوب","متوسط","بد","خیلی بد"],
-  ["خیلی خشک","خشک","متعادل","مرطوب","خیلی مرطوب"],
-  ["خیلی کم","کم","متوسط","زیاد","خیلی زیاد"],
-  ["خیلی زیاد","زیاد","متوسط","کم","خیلی کم"],
-  ["خیلی زیاد","زیاد","متوسط","کم","خیلی کم"],
-  ["خیلی ضعیف","ضعیف","متوسط","خوب","خیلی خوب"],
-  ["خیلی کم","کم","متوسط","زیاد","خیلی زیاد"],
-  ["خیلی زیاد","زیاد","متوسط","کم","خیلی کم"],
-  ["خیلی زیاد","زیاد","متوسط","کم","خیلی کم"],
-  ["خیلی سریع","سریع","متوسط","آرام","خیلی آرام"],
-  ["خیلی کم","کم","متعادل","زیاد","خیلی زیاد"],
-  ["خیلی زیاد","زیاد","متوسط","کم","خیلی کم"],
-  ["خیلی خشک","خشک","متعادل","نرم","خیلی نرم"],
-  ["خیلی سرخ","سرخ","متوسط","رنگ‌پریده","خیلی رنگ‌پریده"],
-  ["خیلی سرد","سرد","متعادل","گرم","خیلی گرم"],
-  ["خیلی شدید","شدید","متوسط","ملایم","خیلی ملایم"],
-  ["خیلی زیاد","زیاد","متوسط","کم","خیلی کم"],
-  ["خیلی زیاد","زیاد","متوسط","کم","خیلی کم"]
-];
+["عملکرد بدنی – انرژی و توان",3,[-2,-1,1,2],[-1,-1,1,1]],
 
-const humors = [
-  {
-    key:"damavi",
-    title:"🔴 دموی",
-    items:[
-      "سرخی چهره",
-      "گرمی بدن",
-      "تعریق زیاد",
-      "خواب نسبتاً خوب",
-      "اشتها مناسب",
-      "نشاط و انرژی"
-    ]
-  },
-  {
-    key:"safrav",
-    title:"🟡 صفراوی",
-    items:[
-      "تشنگی زیاد",
-      "گرمی شدید بدن",
-      "خشکی پوست",
-      "کم‌خوابی",
-      "تحریک‌پذیری",
-      "تلخی دهان"
-    ]
-  },
-  {
-    key:"balghami",
-    title:"🔵 بلغمی",
-    items:[
-      "سردی بدن",
-      "رطوبت پوست",
-      "خواب زیاد",
-      "کندی حرکات",
-      "اشتها متغیر",
-      "بی‌حالی"
-    ]
-  },
-  {
-    key:"sodavi",
-    title:"🟤 سوداوی",
-    items:[
-      "خشکی بدن",
-      "سردی اندام‌ها",
-      "خواب سبک",
-      "فکر زیاد",
-      "نگرانی",
-      "خشکی پوست"
-    ]
-  }
+["پاسخ اندام‌ها به گرما/سرما",3,[-2,-1,1,2],[-1,-1,1,1]],
+
+["ساختار بدنی و جثه",3,[-1,-1,1,1],[-2,-1,1,2]],
+
+["پوست",2,[-1,-1,1,1],[-2,-1,1,2]],
+
+["مو",1,[-1,-1,1,1],[-2,-1,1,2]],
+
+["تعریق",2,[-1,-1,1,2],[-2,-1,1,2]],
+
+["دهان و زبان",2,[-1,-1,1,1],[-2,-1,1,2]],
+
+["گوارش",3,[-2,-1,1,2],[-1,-1,1,1]],
+
+["مدفوع",2,[-1,-1,1,1],[-2,-1,1,2]],
+
+["خواب",2,[-1,-1,1,-1],[-1,-1,1,2]],
+
+["اشتها و تشنگی",2,[-2,-1,1,2],[-1,-1,1,2]],
+
+["حرکت و عضلات",2,[-2,-1,1,2],[-1,-1,1,1]],
+
+["چشم",1,[-1,-1,1,1],[-2,-1,1,2]],
+
+["میل جنسی",1,[-2,-1,1,2],[-1,-1,1,1]],
+
+["سرعت واکنش",2,[-2,-1,1,2],[-1,-1,1,1]],
+
+["ویژگی ذهنی",1,[-1,-1,1,2],[-1,-1,1,1]],
+
+["گرایش حرارتی",3,[-2,-1,1,2],[-1,-1,1,1]],
+
+["رطوبت بدن",2,[-1,-1,1,1],[-2,-1,1,2]],
+
+["رنگ پوست و قوام بدن",1,[-1,-1,1,1],[-2,-1,1,2]]
+
 ];
 
 
-/* =========================================================
-   RENDER QUESTIONS
-========================================================= */
+const labelsByQ=[
 
-function renderQuestions(){
+[
+"خیلی کم و کند",
+"کم و کند",
+"متوسط و طبیعی",
+"زیاد و سریع"
+],
 
-  const container = document.getElementById("questions");
+[
+"انرژی و توان کم",
+"کمی پایین‌تر از معمول",
+"متوسط و طبیعی",
+"انرژی و توان زیاد"
+],
 
-  if(!container) return;
+[
+"زود سرد می‌شوم",
+"کمی متمایل به سردی",
+"در برابر گرما و سرما متعادل هستم",
+"زود گرم می‌شوم"
+],
 
-  container.innerHTML = qs.map((q,index)=>{
+[
+"لاغر و ظریف",
+"نسبتاً لاغر",
+"جثه متوسط",
+"درشت و پرتر"
+],
 
-    const labels = labelsByQ[index];
+[
+"خشک و زبر",
+"کمی خشک",
+"طبیعی و متعادل",
+"نرم و مرطوب"
+],
 
-    return `
-      <div class="question" id="questionBox${index}">
+[
+"کم‌پشت و نازک",
+"نسبتاً کم‌پشت",
+"متوسط",
+"پرپشت و ضخیم"
+],
 
-        <div class="question-title">
-          ${index + 1}. ${q.text}
-        </div>
+[
+"تعریق بسیار کم",
+"تعریق کم",
+"تعریق متوسط",
+"تعریق زیاد"
+],
 
-        <div class="options">
+[
+"خشک و کم‌آب",
+"کمی خشک",
+"طبیعی و متعادل",
+"مرطوب و آب‌دار"
+],
 
-          ${labels.map((label,i)=>`
+[
+"هضم خیلی کند و همراه نفخ",
+"هضم نسبتاً کند",
+"هضم طبیعی",
+"هضم سریع و قوی"
+],
 
-            <div class="option">
+[
+"خشک و سفت",
+"نسبتاً خشک",
+"طبیعی و شکل‌دار",
+"نرم و مرطوب"
+],
 
-              <input
-                type="radio"
-                name="q${index}"
-                id="q${index}_${i}"
-                value="${i}"
-              >
+[
+"خواب کم و سبک",
+"کمی کم یا سبک",
+"خواب متعادل",
+"خواب زیاد و سنگین"
+],
 
-              <label for="q${index}_${i}">
-                ${label}
-              </label>
+[
+"اشتها و تشنگی کم",
+"کمی کمتر از معمول",
+"طبیعی و متعادل",
+"اشتها و تشنگی زیاد"
+],
 
-            </div>
+[
+"عضلات ضعیف و توان کم",
+"کمی ضعیف",
+"قدرت و توان متوسط",
+"عضلات قوی و پرتوان"
+],
 
-          `).join("")}
+[
+"کدر و خشک",
+"کمی کدر",
+"طبیعی و متعادل",
+"شفاف و درخشان"
+],
 
-        </div>
+[
+"میل جنسی کم",
+"کمی کمتر از معمول",
+"متوسط و طبیعی",
+"میل جنسی زیاد"
+],
 
-      </div>
-    `;
+[
+"خیلی کند",
+"کند",
+"متوسط",
+"سریع"
+],
 
-  }).join("");
+[
+"ذهن آرام و کم‌تحرک",
+"کمی کند یا کم‌تحرک",
+"متعادل و طبیعی",
+"ذهن فعال و سریع"
+],
+
+[
+"بیشتر احساس سرما می‌کنم",
+"کمی متمایل به سرما",
+"متعادل",
+"بیشتر احساس گرما می‌کنم"
+],
+
+[
+"بدن خشک و کم‌آب",
+"کمی خشک",
+"متعادل",
+"بدن مرطوب و آب‌دار"
+],
+
+[
+"رنگ‌پریده و بافت بدن نرم و شل",
+"نسبتاً رنگ‌پریده و بافت بدن نسبتاً نرم",
+"رنگ پوست طبیعی و بافت بدن متعادل و نسبتاً سفت",
+"رنگ پوست پررنگ‌تر و بافت بدن سفت و منسجم"
+]
+
+];
+
+
+const humors={
+
+"دموی":[
+"سرخی صورت یا پوست",
+"احساس گرمی بدن",
+"پرخونی یا سنگینی سر",
+"تعریق نسبتاً زیاد",
+"اشتهای خوب همراه با نشاط",
+"احساس پری و سنگینی پس از غذا"
+],
+
+"صفراوی":[
+"گرمی و خشکی بدن",
+"تلخی یا خشکی دهان",
+"تشنگی زیاد",
+"زود عصبانی شدن",
+"خواب کم یا سبک",
+"سوزش معده یا احساس حرارت"
+],
+
+"بلغمی":[
+"سردی دست و پا",
+"خواب‌آلودگی و کسالت",
+"سنگینی بدن",
+"رطوبت یا آبریزش زیاد",
+"هضم کند و نفخ",
+"تمایل به شیرینی یا غذاهای سنگین"
+],
+
+"سوداوی":[
+"خشکی پوست",
+"یبوست یا مدفوع خشک",
+"خواب سبک یا بی‌خوابی",
+"فکر و نگرانی زیاد",
+"لاغری یا تحلیل رفتن بدن",
+"تیرگی یا کدورت رنگ پوست"
+]
+
+};
+
+
+const qbox=document.getElementById("questions");
+
+qs.forEach((q,i)=>{
+
+let el=document.createElement("div");
+
+el.className="q";
+
+el.innerHTML=`
+<div class="q-title">
+${i+1}. ${q[0]}
+<span class="note">(${q[1]} امتیاز)</span>
+</div>
+
+<div class="options">
+
+${labelsByQ[i].map((x,j)=>`
+
+<label>
+
+<input required type="radio"
+name="q${i}"
+value="${j}">
+
+${x}
+
+</label>
+
+`).join("")}
+
+</div>
+`;
+
+qbox.appendChild(el);
+
+});
+
+
+const hbox=document.getElementById("humors");
+
+Object.entries(humors).forEach(([h,items])=>{
+
+let sec=document.createElement("div");
+
+sec.innerHTML=`
+<div class="q-title" style="margin-top:12px">
+${h}
+</div>
+`;
+
+items.forEach((x,j)=>{
+
+sec.innerHTML+=`
+
+<div class="q">
+
+<div class="q-title">
+${x}
+</div>
+
+<div class="options">
+
+${["ندارد","خفیف","متوسط","شدید"].map((t,v)=>`
+
+<label>
+
+<input type="radio"
+name="${h}${j}"
+value="${v}">
+
+${t}
+
+</label>
+
+`).join("")}
+
+</div>
+
+</div>
+
+`;
+
+});
+
+hbox.appendChild(sec);
+
+});
+
+
+document.getElementById("date").value=
+new Date().toISOString().slice(0,10);
+
+
+function val(name){
+
+let x=document.querySelector(
+`input[name="${name}"]:checked`
+);
+
+return x ? +x.value : null;
+
 }
 
-
-/* =========================================================
-   RENDER HUMORS
-========================================================= */
-
-function renderHumors(){
-
-  const container = document.getElementById("humors");
-
-  if(!container) return;
-
-  container.innerHTML = humors.map((humor,index)=>`
-
-    <div class="humor-card">
-
-      <h3>${humor.title}</h3>
-
-      <div class="humor-options">
-
-        ${humor.items.map((item,i)=>`
-
-          <div class="humor-option">
-
-            <input
-              type="checkbox"
-              id="humor_${index}_${i}"
-              name="${humor.key}"
-              value="1"
-            >
-
-            <label for="humor_${index}_${i}">
-              ${item}
-            </label>
-
-          </div>
-
-        `).join("")}
-
-      </div>
-
-    </div>
-
-  `).join("");
-}
-
-
-/* =========================================================
-   TEMPERAMENT
-========================================================= */
-
-function getTemperament(thermal, moisture){
-
-  if(thermal >= 12 && moisture >= 12)
-    return "دموی";
-
-  if(thermal >= 12 && moisture <= -12)
-    return "صفراوی";
-
-  if(thermal <= -12 && moisture >= 12)
-    return "بلغمی";
-
-  if(thermal <= -12 && moisture <= -12)
-    return "سوداوی";
-
-  if(thermal >= 12)
-    return "گرم";
-
-  if(thermal <= -12)
-    return "سرد";
-
-  if(moisture >= 12)
-    return "تر";
-
-  if(moisture <= -12)
-    return "خشک";
-
-  return "متعادل / ترکیبی";
-}
-
-
-function temperamentClass(temp){
-
-  if(temp.includes("دموی"))
-    return "temperament-damavi";
-
-  if(temp.includes("صفراوی"))
-    return "temperament-safrav";
-
-  if(temp.includes("بلغمی"))
-    return "temperament-balghami";
-
-  if(temp.includes("سوداوی"))
-    return "temperament-sodavi";
-
-  return "temperament-neutral";
-}
-
-
-function temperamentDescription(temp){
-
-  const descriptions = {
-
-    "دموی":
-      "الگوی غالب گرم و تر است. شاخص‌های گرمی و رطوبت در پاسخ‌های ثبت‌شده برجستگی بیشتری داشته‌اند.",
-
-    "صفراوی":
-      "الگوی غالب گرم و خشک است. شاخص‌های گرمی و خشکی در پاسخ‌های ثبت‌شده برجستگی بیشتری داشته‌اند.",
-
-    "بلغمی":
-      "الگوی غالب سرد و تر است. شاخص‌های سردی و رطوبت در پاسخ‌های ثبت‌شده برجستگی بیشتری داشته‌اند.",
-
-    "سوداوی":
-      "الگوی غالب سرد و خشک است. شاخص‌های سردی و خشکی در پاسخ‌های ثبت‌شده برجستگی بیشتری داشته‌اند."
-
-  };
-
-  return descriptions[temp] ||
-    "نتیجه در محدوده متعادل یا ترکیبی قرار گرفته است. برای تفسیر نهایی، علائم و شرایط فردی نیز باید در نظر گرفته شوند.";
-}
-
-
-/* =========================================================
-   DOMINANT HUMOR
-========================================================= */
-
-function dominantName(key){
-
-  const names = {
-    damavi:"دموی",
-    safrav:"صفراوی",
-    balghami:"بلغمی",
-    sodavi:"سوداوی",
-    ترکیبی:"ترکیبی"
-  };
-
-  return names[key] || "نامشخص";
-}
-
-
-/* =========================================================
-   CALCULATE
-========================================================= */
 
 function calculate(){
 
-  try{
+let thermal=0;
+let moist=0;
+let missing=false;
 
-    let thermal = 0;
-    let moisture = 0;
 
-    const unanswered = [];
+qs.forEach((q,i)=>{
 
-    /* -----------------------------------------
-       بررسی و محاسبه 20 سؤال
-    ----------------------------------------- */
+let v=val("q"+i);
 
-    qs.forEach((q,index)=>{
+if(v===null){
 
-      const selected = document.querySelector(
-        `input[name="q${index}"]:checked`
-      );
+missing=true;
 
-      if(!selected){
+return;
 
-        unanswered.push(index + 1);
-        return;
-      }
+}
 
-      const value = Number(selected.value);
+thermal += q[2][v] * q[1];
 
-      if(
-        Number.isNaN(value) ||
-        !q.thermal[value] === undefined
-      ){
-        throw new Error(
-          `خطا در پاسخ سؤال شماره ${index + 1}`
-        );
-      }
+moist += q[3][v] * q[1];
 
-      thermal += Number(q.thermal[value] || 0) * q.weight;
-      moisture += Number(q.moisture[value] || 0) * q.weight;
+});
 
-    });
 
+if(missing){
 
-    /* -----------------------------------------
-       جلوگیری از محاسبه ناقص
-    ----------------------------------------- */
+alert("لطفاً به همه ۲۰ سؤال مزاج پاسخ دهید.");
 
-    if(unanswered.length > 0){
-
-      alert(
-        "لطفاً به همه ۲۰ سؤال پاسخ دهید.\n\n" +
-        "سؤال‌های بدون پاسخ:\n" +
-        unanswered.join("، ")
-      );
-
-      const firstQuestion =
-        document.getElementById(
-          `questionBox${unanswered[0] - 1}`
-        );
-
-      if(firstQuestion){
-
-        firstQuestion.scrollIntoView({
-          behavior:"smooth",
-          block:"center"
-        });
-
-      }
-
-      return;
-    }
-
-
-    /* -----------------------------------------
-       مزاج
-    ----------------------------------------- */
-
-    const temp =
-      getTemperament(thermal,moisture);
-
-
-    /* -----------------------------------------
-       وضوح
-    ----------------------------------------- */
-
-    let clarity = "متوسط";
-
-    if(
-      Math.abs(thermal) >= 24 &&
-      Math.abs(moisture) >= 24
-    ){
-
-      clarity = "بسیار واضح";
-
-    }
-    else if(
-      Math.abs(thermal) >= 18 &&
-      Math.abs(moisture) >= 18
-    ){
-
-      clarity = "واضح";
-
-    }
-
-
-    /* -----------------------------------------
-       اخلاط
-    ----------------------------------------- */
-
-    const humorScores = {
-
-      damavi:
-        document.querySelectorAll(
-          'input[name="damavi"]:checked'
-        ).length,
-
-      safrav:
-        document.querySelectorAll(
-          'input[name="safrav"]:checked'
-        ).length,
-
-      balghami:
-        document.querySelectorAll(
-          'input[name="balghami"]:checked'
-        ).length,
-
-      sodavi:
-        document.querySelectorAll(
-          'input[name="sodavi"]:checked'
-        ).length
-
-    };
-
-
-    const sortedHumors =
-      Object.entries(humorScores)
-        .sort((a,b)=>b[1]-a[1]);
-
-
-    let dominant =
-      sortedHumors[0][0];
-
-
-    if(
-      sortedHumors[0][1] ===
-      sortedHumors[1][1]
-    ){
-
-      dominant = "ترکیبی";
-
-    }
-
-
-    /* -----------------------------------------
-       درصد مزاج‌ها
-    ----------------------------------------- */
-
-    const warm =
-      Math.max(0,thermal);
-
-    const cold =
-      Math.max(0,-thermal);
-
-    const wet =
-      Math.max(0,moisture);
-
-    const dry =
-      Math.max(0,-moisture);
-
-
-    const raw = {
-
-      damavi: warm + wet,
-
-      safrav: warm + dry,
-
-      balghami: cold + wet,
-
-      sodavi: cold + dry
-
-    };
-
-
-    const total =
-      Object.values(raw)
-        .reduce(
-          (sum,value)=>sum + value,
-          0
-        );
-
-
-    let percentages;
-
-
-    if(total === 0){
-
-      percentages = {
-        damavi:25,
-        safrav:25,
-        balghami:25,
-        sodavi:25
-      };
-
-    }
-    else{
-
-      percentages = {
-
-        damavi:
-          raw.damavi / total * 100,
-
-        safrav:
-          raw.safrav / total * 100,
-
-        balghami:
-          raw.balghami / total * 100,
-
-        sodavi:
-          raw.sodavi / total * 100
-
-      };
-
-    }
-
-
-    /* -----------------------------------------
-       اطلاعات مراجعه کننده
-    ----------------------------------------- */
-
-    const getValue = id =>
-      document.getElementById(id)?.value?.trim() || "—";
-
-
-    const name =
-      getValue("name");
-
-    const caseNo =
-      getValue("caseNo");
-
-    const age =
-      getValue("age");
-
-    const sex =
-      document.getElementById("sex")?.value || "—";
-
-    const phone =
-      getValue("phone");
-
-    const date =
-      document.getElementById("date")?.value || "—";
-
-    const note =
-      getValue("initialNote") === "—"
-        ? "یادداشت خاصی ثبت نشده است."
-        : getValue("initialNote");
-
-
-    /* -----------------------------------------
-       پر کردن گزارش
-    ----------------------------------------- */
-
-    document.getElementById("rName").textContent =
-      name;
-
-    document.getElementById("rCaseNo").textContent =
-      caseNo;
-
-    document.getElementById("rAge").textContent =
-      age;
-
-    document.getElementById("rSex").textContent =
-      sex;
-
-    document.getElementById("rPhone").textContent =
-      phone;
-
-    document.getElementById("rDate").textContent =
-      formatDate(date);
-
-    document.getElementById("reportInitialNote").textContent =
-      note;
-
-
-    /* -----------------------------------------
-       نتیجه اصلی
-    ----------------------------------------- */
-
-    const hero =
-      document.getElementById("resultHero");
-
-
-    hero.className =
-      "result-hero " +
-      temperamentClass(temp);
-
-
-    document.getElementById("resultTitle").textContent =
-      temp;
-
-
-    document.getElementById("resultSubtitle").textContent =
-      "الگوی غالب اخلاطی: " +
-      dominantName(dominant) +
-      " | وضوح نتیجه: " +
-      clarity;
-
-
-    /* -----------------------------------------
-       محور حرارتی
-    ----------------------------------------- */
-
-    let thermalText = "متعادل (0)";
-
-    if(thermal > 0){
-
-      thermalText =
-        `گرم (${thermal})`;
-
-    }
-    else if(thermal < 0){
-
-      thermalText =
-        `سرد (${Math.abs(thermal)})`;
-
-    }
-
-
-    document.getElementById("thermalResult").textContent =
-      thermalText;
-
-
-    /* -----------------------------------------
-       محور رطوبتی
-    ----------------------------------------- */
-
-    let moistureText = "متعادل (0)";
-
-    if(moisture > 0){
-
-      moistureText =
-        `تر (${moisture})`;
-
-    }
-    else if(moisture < 0){
-
-      moistureText =
-        `خشک (${Math.abs(moisture)})`;
-
-    }
-
-
-    document.getElementById("moistureResult").textContent =
-      moistureText;
-
-
-    document.getElementById("clarityResult").textContent =
-      clarity;
-
-
-    document.getElementById("temperamentDescription").textContent =
-      temperamentDescription(temp);
-
-
-    /* -----------------------------------------
-       نتایج اخلاط
-    ----------------------------------------- */
-
-    updateHumorResult(
-      "damavi",
-      humorScores.damavi
-    );
-
-    updateHumorResult(
-      "safrav",
-      humorScores.safrav
-    );
-
-    updateHumorResult(
-      "balghami",
-      humorScores.balghami
-    );
-
-    updateHumorResult(
-      "sodavi",
-      humorScores.sodavi
-    );
-
-
-    /* -----------------------------------------
-       نمودار
-    ----------------------------------------- */
-
-    setChart(
-      "Damavi",
-      percentages.damavi
-    );
-
-    setChart(
-      "Safrav",
-      percentages.safrav
-    );
-
-    setChart(
-      "Balgham",
-      percentages.balghami
-    );
-
-    setChart(
-      "Soda",
-      percentages.sodavi
-    );
-
-
-    /* -----------------------------------------
-       نمایش گزارش
-    ----------------------------------------- */
-
-    const report =
-      document.getElementById("report");
-
-
-    report.style.display =
-      "block";
-
-
-    setTimeout(()=>{
-
-      report.scrollIntoView({
-        behavior:"smooth",
-        block:"start"
-      });
-
-    },100);
-
-  }
-  catch(error){
-
-    console.error(
-      "CALCULATION ERROR:",
-      error
-    );
-
-    alert(
-      "در محاسبه ارزیابی خطایی رخ داده است.\n\n" +
-      error.message
-    );
-
-  }
+return;
 
 }
 
 
-/* =========================================================
-   CHART
-========================================================= */
-
-function setChart(name,value){
-
-  const rounded =
-    Math.round(value * 10) / 10;
-
-
-  const bar =
-    document.getElementById(
-      "chart" + name
-    );
+const t=
+thermal>=12
+?"گرم"
+:
+thermal<=-12
+?"سرد"
+:
+"متعادل/مرزی";
 
 
-  const valueEl =
-    document.getElementById(
-      "chart" + name + "Value"
-    );
+const m=
+moist>=12
+?"تر"
+:
+moist<=-12
+?"خشک"
+:
+"متعادل/مرزی";
 
 
-  if(!bar || !valueEl){
-
-    console.error(
-      "Chart element not found:",
-      name
-    );
-
-    return;
-  }
-
-
-  bar.dataset.height =
-    rounded;
-
-
-  bar.style.height =
-    "0%";
+let temperament=
+(t==="گرم"&&m==="تر")
+?"دموی"
+:
+(t==="گرم"&&m==="خشک")
+?"صفراوی"
+:
+(t==="سرد"&&m==="تر")
+?"بلغمی"
+:
+(t==="سرد"&&m==="خشک")
+?"سوداوی"
+:
+"متعادل/ترکیبی";
 
 
-  valueEl.textContent =
-    rounded + "%";
+const hum=[];
 
 
-  requestAnimationFrame(()=>{
+for(
+const [h,items]
+of Object.entries(humors)
+){
 
-    setTimeout(()=>{
+let total=0;
 
-      bar.style.height =
-        rounded + "%";
+items.forEach((_,j)=>{
 
-    },50);
+let v=val(h+j);
 
-  });
+if(v===null)
 
-}
+missing=true;
 
+else
 
-/* =========================================================
-   HUMOR RESULT
-========================================================= */
+total+=v;
 
-function updateHumorResult(key,score){
+});
 
-  const scoreElement =
-    document.getElementById(
-      key + "Score"
-    );
-
-
-  const progressElement =
-    document.getElementById(
-      key + "Progress"
-    );
-
-
-  if(!scoreElement || !progressElement){
-
-    console.error(
-      "Humor result element not found:",
-      key
-    );
-
-    return;
-  }
-
-
-  const percentage =
-    Math.round(
-      (score / 6) * 100
-    );
-
-
-  scoreElement.textContent =
-    `${score}/6`;
-
-
-  progressElement.style.width =
-    percentage + "%";
+hum.push([h,total]);
 
 }
 
 
-/* =========================================================
-   DATE
-========================================================= */
+if(missing){
 
-function formatDate(date){
+alert(
+"لطفاً به همه موارد غربالگری اخلاط پاسخ دهید."
+);
 
-  if(!date)
-    return "—";
-
-
-  const parts =
-    date.split("-");
-
-
-  if(parts.length !== 3)
-    return date;
-
-
-  return `${parts[2]}/${parts[1]}/${parts[0]}`;
+return;
 
 }
 
 
-/* =========================================================
-   SAVE CASE
-========================================================= */
+hum.sort((a,b)=>b[1]-a[1]);
+
+
+let dominant=
+hum[0][1]===hum[1][1]
+?
+"الگوی مشترک / نیازمند ارزیابی بالینی"
+:
+hum[0][0];
+
+
+const level=
+(Math.abs(thermal)>=24 &&
+Math.abs(moist)>=24)
+?
+"بسیار واضح"
+:
+(Math.abs(thermal)>=18 &&
+Math.abs(moist)>=18)
+?
+"واضح"
+:
+"متوسط";
+
+
+document.getElementById("report").innerHTML=`
+
+<p>
+
+<span class="badge">
+
+مزاج پیشنهادی: ${temperament}
+
+</span>
+
+</p>
+
+
+<div class="scoregrid">
+
+<div class="score">
+
+محور گرمی/سردی
+
+<br>
+
+<b>${thermal.toFixed(1)}</b>
+
+<br>
+
+${t}
+
+</div>
+
+
+<div class="score">
+
+محور تری/خشکی
+
+<br>
+
+<b>${moist.toFixed(1)}</b>
+
+<br>
+
+${m}
+
+</div>
+
+</div>
+
+
+<p>
+
+<b>وضوح الگو:</b>
+
+${level}
+
+</p>
+
+
+<h3>
+غربالگری اخلاط فعلی
+</h3>
+
+
+<table>
+
+<tr>
+
+<th>خلط</th>
+
+<th>امتیاز از ۱۸</th>
+
+</tr>
+
+${hum.map(x=>`
+
+<tr>
+
+<td>${x[0]}</td>
+
+<td>${x[1]}</td>
+
+</tr>
+
+`).join("")}
+
+</table>
+
+
+<p>
+
+<b>الگوی غالب فعلی:</b>
+
+${dominant}
+
+</p>
+
+
+<hr>
+
+
+<p class="note">
+
+این محاسبات یک مدل عملی پیشنهادی برای غربالگری است
+و ضرایب و آستانه‌های آن به‌عنوان آزمون تشخیصی استانداردشده
+اعتبارسنجی نشده‌اند.
+تفسیر نهایی باید با ارزیابی بالینی و منابع معتبر طب ایرانی انجام شود.
+
+</p>
+
+`;
+
+
+document.getElementById("result")
+.classList.add("show");
+
+
+window.scrollTo({
+
+top:
+document.getElementById("result").offsetTop-10,
+
+behavior:"smooth"
+
+});
+
+
+return {
+
+thermal,
+moist,
+temperament,
+hum,
+dominant,
+level
+
+};
+
+}
+
 
 function saveCase(){
 
-  try{
+const r=calculate();
 
-    const cases =
-      JSON.parse(
-        localStorage.getItem(
-          "hakimCases"
-        ) || "[]"
-      );
+if(!r)return;
 
 
-    const record = {
+const data={
 
-      id:Date.now(),
+id:Date.now(),
 
-      name:
-        document.getElementById("name").value.trim(),
+name:name.value,
 
-      caseNo:
-        document.getElementById("caseNo").value.trim(),
+caseNo:caseNo.value,
 
-      age:
-        document.getElementById("age").value.trim(),
+age:age.value,
 
-      sex:
-        document.getElementById("sex").value,
+sex:sex.value,
 
-      phone:
-        document.getElementById("phone").value.trim(),
+phone:phone.value,
 
-      date:
-        document.getElementById("date").value,
+date:date.value,
 
-      note:
-        document.getElementById("initialNote").value.trim(),
+note:initialNote.value,
 
-      savedAt:
-        new Date().toISOString()
+result:r
 
-    };
+};
 
 
-    cases.unshift(record);
+let cases=
+JSON.parse(
+localStorage.getItem("hakimCases")||"[]"
+);
 
 
-    if(cases.length > 100){
-      cases.length = 100;
-    }
+cases.unshift(data);
 
 
-    localStorage.setItem(
-      "hakimCases",
-      JSON.stringify(cases)
-    );
+localStorage.setItem(
+"hakimCases",
+JSON.stringify(
+cases.slice(0,100)
+)
+);
 
-
-    renderCases();
-
-
-    alert(
-      "پرونده با موفقیت ذخیره شد."
-    );
-
-  }
-  catch(error){
-
-    console.error(error);
-
-    alert(
-      "ذخیره پرونده انجام نشد."
-    );
-
-  }
-
-}
-
-
-/* =========================================================
-   RENDER CASES
-========================================================= */
-
-function renderCases(){
-
-  const list =
-    document.getElementById(
-      "caseList"
-    );
-
-
-  if(!list)
-    return;
-
-
-  let cases = [];
-
-
-  try{
-
-    cases =
-      JSON.parse(
-        localStorage.getItem(
-          "hakimCases"
-        ) || "[]"
-      );
-
-  }
-  catch(error){
-
-    cases = [];
-
-  }
-
-
-  if(!cases.length){
-
-    list.innerHTML =
-      `<div style="color:#777;font-size:13px;">
-        هنوز پرونده‌ای ذخیره نشده است.
-      </div>`;
-
-    return;
-  }
-
-
-  list.innerHTML =
-    cases.map(item=>`
-
-      <div class="case-item">
-
-        <div class="case-info">
-
-          <strong>
-            ${escapeHtml(
-              item.name || "بدون نام"
-            )}
-          </strong>
-
-          <br>
-
-          پرونده:
-          ${escapeHtml(
-            item.caseNo || "—"
-          )}
-
-          |
-
-          سن:
-          ${escapeHtml(
-            item.age || "—"
-          )}
-
-          |
-
-          تاریخ:
-          ${formatDate(item.date)}
-
-        </div>
-
-        <div class="case-actions">
-
-          <button
-            class="btn btn-light"
-            onclick="loadCase(${item.id})"
-          >
-            مشاهده
-          </button>
-
-          <button
-            class="btn btn-danger"
-            onclick="delCase(${item.id})"
-          >
-            حذف
-          </button>
-
-        </div>
-
-      </div>
-
-    `).join("");
-
-}
-
-
-/* =========================================================
-   LOAD CASE
-========================================================= */
-
-function loadCase(id){
-
-  const cases =
-    JSON.parse(
-      localStorage.getItem(
-        "hakimCases"
-      ) || "[]"
-    );
-
-
-  const item =
-    cases.find(
-      x => x.id === id
-    );
-
-
-  if(!item)
-    return;
-
-
-  document.getElementById("name").value =
-    item.name || "";
-
-  document.getElementById("caseNo").value =
-    item.caseNo || "";
-
-  document.getElementById("age").value =
-    item.age || "";
-
-  document.getElementById("sex").value =
-    item.sex || "";
-
-  document.getElementById("phone").value =
-    item.phone || "";
-
-  document.getElementById("date").value =
-    item.date || "";
-
-  document.getElementById("initialNote").value =
-    item.note || "";
-
-
-  /*
-     توجه:
-     در ساختار فعلی پرونده‌ها پاسخ 20 سؤال
-     ذخیره نمی‌شود؛ بنابراین بعد از بارگذاری
-     پرونده نمی‌توان محاسبه قبلی را بازسازی کرد.
-  */
-
-  alert(
-    "اطلاعات مراجعه‌کننده بارگذاری شد.\n" +
-    "برای محاسبه، پاسخ سؤال‌ها را نیز وارد کنید."
-  );
-
-
-  window.scrollTo({
-    top:0,
-    behavior:"smooth"
-  });
-
-}
-
-
-/* =========================================================
-   DELETE CASE
-========================================================= */
-
-function delCase(id){
-
-  if(
-    !confirm(
-      "آیا از حذف این پرونده مطمئن هستید؟"
-    )
-  ){
-    return;
-  }
-
-
-  let cases =
-    JSON.parse(
-      localStorage.getItem(
-        "hakimCases"
-      ) || "[]"
-    );
-
-
-  cases =
-    cases.filter(
-      x => x.id !== id
-    );
-
-
-  localStorage.setItem(
-    "hakimCases",
-    JSON.stringify(cases)
-  );
-
-
-  renderCases();
-
-}
-
-
-/* =========================================================
-   RESET
-========================================================= */
-
-function resetForm(){
-
-  if(
-    !confirm(
-      "اطلاعات فرم پاک شود و ارزیابی جدید آغاز شود؟"
-    )
-  ){
-    return;
-  }
-
-
-  [
-    "name",
-    "caseNo",
-    "age",
-    "phone",
-    "initialNote"
-  ].forEach(id=>{
-
-    const element =
-      document.getElementById(id);
-
-    if(element)
-      element.value = "";
-
-  });
-
-
-  document.getElementById("sex").value =
-    "";
-
-
-  document.querySelectorAll(
-    'input[type="radio"], input[type="checkbox"]'
-  ).forEach(input=>{
-
-    input.checked = false;
-
-  });
-
-
-  document.getElementById("report").style.display =
-    "none";
-
-
-  window.scrollTo({
-    top:0,
-    behavior:"smooth"
-  });
-
-}
-
-
-/* =========================================================
-   PRINT
-========================================================= */
-
-function printReport(){
-
-  const report =
-    document.getElementById(
-      "report"
-    );
-
-
-  if(
-    !report ||
-    report.style.display === "none"
-  ){
-
-    alert(
-      "ابتدا نتیجه ارزیابی را محاسبه کنید."
-    );
-
-    return;
-  }
-
-
-  window.print();
-
-}
-
-
-/* =========================================================
-   ESCAPE HTML
-========================================================= */
-
-function escapeHtml(value){
-
-  return String(value)
-    .replace(/&/g,"&amp;")
-    .replace(/</g,"&lt;")
-    .replace(/>/g,"&gt;")
-    .replace(/"/g,"&quot;")
-    .replace(/'/g,"&#039;");
-
-}
-
-
-/* =========================================================
-   INITIALIZE
-========================================================= */
-
-renderQuestions();
-
-renderHumors();
 
 renderCases();
 
 
-/* تاریخ امروز */
-
-(function(){
-
-  const date =
-    document.getElementById(
-      "date"
-    );
-
-
-  if(
-    date &&
-    !date.value
-  ){
-
-    const now =
-      new Date();
-
-
-    const year =
-      now.getFullYear();
-
-
-    const month =
-      String(
-        now.getMonth() + 1
-      ).padStart(2,"0");
-
-
-    const day =
-      String(
-        now.getDate()
-      ).padStart(2,"0");
-
-
-    date.value =
-      `${year}-${month}-${day}`;
-
-  }
-
-})();
-
-
-/* =========================================================
-   PWA
-========================================================= */
-
-if(
-  "serviceWorker" in navigator
-){
-
-  window.addEventListener(
-    "load",
-    ()=>{
-      navigator.serviceWorker
-        .register("sw.js")
-        .catch(error=>{
-          console.log(
-            "Service Worker Error:",
-            error
-          );
-        });
-    }
-  );
+alert(
+"پرونده با موفقیت روی این دستگاه ذخیره شد."
+);
 
 }
 
+
+function renderCases(){
+
+const el=
+document.getElementById("caseList");
+
+
+const cases=
+JSON.parse(
+localStorage.getItem("hakimCases")||"[]"
+);
+
+
+if(!cases.length){
+
+el.textContent=
+"هنوز پرونده‌ای ذخیره نشده است.";
+
+return;
+
+}
+
+
+el.innerHTML=
+
+cases.map(c=>`
+
+<div class="case">
+
+<div>
+
+<b>
+${c.name||"بدون نام"}
+</b>
+
+<br>
+
+<span class="note">
+
+${c.caseNo||"-"}
+|
+${c.date||"-"}
+|
+${c.result.temperament}
+
+</span>
+
+</div>
+
+
+<button
+class="btn danger"
+onclick="delCase(${c.id})">
+
+حذف
+
+</button>
+
+</div>
+
+`).join("");
+
+}
+
+
+function delCase(id){
+
+let c=
+JSON.parse(
+localStorage.getItem("hakimCases")||"[]"
+)
+.filter(x=>x.id!==id);
+
+
+localStorage.setItem(
+"hakimCases",
+JSON.stringify(c)
+);
+
+
+renderCases();
+
+}
+
+
+renderCases();
+
+
+if("serviceWorker" in navigator)
+
+navigator.serviceWorker.register("sw.js");
+
 </script>
+
+</body>
+</html>
